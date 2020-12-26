@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mission_id: 1
+  title: MyString
+  deadline: 2020-12-26 09:40:57
+  status: 1
+
+two:
+  mission_id: 1
+  title: MyString
+  deadline: 2020-12-26 09:40:57
+  status: 1

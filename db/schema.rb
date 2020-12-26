@@ -10,7 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_052050) do
+ActiveRecord::Schema.define(version: 2020_12_26_094057) do
+
+  create_table "missions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.string "record_title"
+    t.date "deadline"
+    t.integer "continuation", default: 0
+    t.integer "recovery", default: 0
+    t.integer "small_goal_clear", default: 0
+    t.integer "total_record", default: 0
+    t.integer "total_time_attack", default: 0
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.integer "mission_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "follow_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follow_id"], name: "index_relationships_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
+
+  create_table "small_goals", force: :cascade do |t|
+    t.integer "mission_id"
+    t.string "title"
+    t.date "deadline"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "time_attacks", force: :cascade do |t|
+    t.integer "mission_id"
+    t.string "title"
+    t.datetime "deadline"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer "my_id", null: false
