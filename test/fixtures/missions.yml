@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  title: MyString
+  record_title: MyString
+  deadlene: 2020-12-26
+  continuation: 1
+  recovery: 1
+  small_goal_clear: 1
+  total_record: 1
+  total_time_attack: 1
+  status: 1
+
+two:
+  user_id: 1
+  title: MyString
+  record_title: MyString
+  deadlene: 2020-12-26
+  continuation: 1
+  recovery: 1
+  small_goal_clear: 1
+  total_record: 1
+  total_time_attack: 1
+  status: 1
