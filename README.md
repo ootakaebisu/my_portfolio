@@ -25,7 +25,7 @@
 主に、継続したい事柄に着手する時と終わった時。
 
 ## 設計書
-https://xd.adobe.com/view/5d519ce9-4ed3-4c23-8f73-c643dcc6e4d0-0802/
+https://xd.adobe.com/view/a49e0515-01b9-4e15-afd0-74de6ec26daa-f1cd/
 
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/1viWKdB3igaXqDh1uDPBxE2Ea56nsM60W2queCUQ9TiU/edit#gid=0
