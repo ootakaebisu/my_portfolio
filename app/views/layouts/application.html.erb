@@ -5,11 +5,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-<!-- カレンダー機能追加/body タグに data-turbolinks 属性を追加 -->
+  <!--カレンダー機能追加/body タグに data-turbolinks 属性を追加-->
   <body data-turbolinks="false">
     <%= yield %>
   </body>

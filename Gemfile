@@ -68,3 +68,4 @@ gem 'pry-byebug'
 gem 'jquery-rails'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+
