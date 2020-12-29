@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 2020_12_26_094057) do
     t.integer "user_id"
     t.string "title"
     t.string "record_title"
-    t.date "deadline"
+    t.date "deadline_on"
     t.integer "continuation", default: 0
     t.integer "recovery", default: 0
     t.integer "small_goal_clear", default: 0
     t.integer "total_record", default: 0
     t.integer "total_time_attack", default: 0
-    t.integer "status", default: 0
+    t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_12_26_094057) do
   create_table "small_goals", force: :cascade do |t|
     t.integer "mission_id"
     t.string "title"
-    t.date "deadline"
+    t.date "deadline_"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(version: 2020_12_26_094057) do
   create_table "time_attacks", force: :cascade do |t|
     t.integer "mission_id"
     t.string "title"
-    t.datetime "deadline"
-    t.integer "status"
+    t.datetime "deadline_at"
+    t.string "diff_at"
+    t.datetime "finish_at"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

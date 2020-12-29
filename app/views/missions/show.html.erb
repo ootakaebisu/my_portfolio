@@ -1,4 +1,40 @@
-<h1>Missions#show</h1>
-<p>Find me in app/views/missions/show.html.erb</p>
+<!--作成/TimeAttackデータ-->
+<%= form_with model: @time_attack, local: true do |f| %>
+  <%= f.hidden_field :mission_id, :value => @mission.id %>
+  <%= f.text_field :title %>
+  <%= f.datetime_field :deadline_at %>
 
-<%= link_to "ログアウト(挙動確認用)", destroy_user_session_path, method: :delete %>
+  <%= f.submit %>
+<% end %>
+
+<!--表示/TimeAttackデータ-->
+<% @time_attacks.each do |time_attack| %>
+  <%= time_attack.title %>
+
+  <!--ステータスによる表示内容の分岐-->
+  <!--実行前=>実行中-->
+  <% if time_attack.status == "before" %>
+    <%= l time_attack.deadline_at, format: :short%>
+    <%= form_with model: @time_attack_created, url: time_attack_path(time_attack.id), local: true do |f| %>
+      <%= f.hidden_field :status, :value => "doing" %>
+      <%= f.submit "Start" %>
+    <% end %>
+
+  <!--実行中=>終了-->
+  <% elsif time_attack.status == "doing" %>
+    <%= l time_attack.deadline_at, format: :short%>
+    <%= form_with model: @time_attack_created, url: time_attack_path(time_attack.id), local: true do |f| %>
+      <%= f.hidden_field :status, :value => "after" %>
+      <%= f.submit "Finish" %>
+    <% end %>
+
+  <!--終了後-->
+  <% else %>
+    <%= time_attack.diff_at %>
+  <% end %><br>
+
+<% end %>
+
+
+
+
