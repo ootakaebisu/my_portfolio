@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :daily_clears, only:[:show, :create, :update]
   resources :time_attacks, only:[:create, :update, :index]
   resources :records, only:[:new, :create, :index, :destroy]
+  resources :small_goals, only:[:create, :update, :destroy]
   resources :calendars, only:[:show, :create, :update]
   resources :gantts, only:[:show, :create, :edit, :update]
 end

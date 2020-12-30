@@ -6,7 +6,6 @@ class TimeAttacksController < ApplicationController
     if @time_attack.save
       redirect_back(fallback_location: root_path)
     else
-      byebug
       render :new
     end
   end

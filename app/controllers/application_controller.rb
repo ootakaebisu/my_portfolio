@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def after_sign_in_path_for(resource)
-    mission_path(resource)
+    new_record_path(resource)
   end
 
   def after_sign_out_path_for(resource)
