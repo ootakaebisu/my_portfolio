@@ -1,2 +1,7 @@
 <h1>DailyClears#show</h1>
-<p>Find me in app/views/daily_clears/show.html.erb</p>
+
+<label>result</label><br>
+<label><%= @mission.title %></label><br>
+<label>Today's Mission Clear!</label><br>
+<label><%= "Total " + @daily_records.to_s %></label><br>
+<%= link_to "Work Spaceへ戻る", mission_path(@mission.id) %>

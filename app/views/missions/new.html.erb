@@ -1,2 +1,13 @@
 <h1>Missions#new</h1>
-<p>Find me in app/views/missions/new.html.erb</p>
+
+<%= form_with model: @mission, url: missions_path, local: true do |f| %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <label>タイトル</label><br>
+  <%= f.text_field :title %><br>
+  <label>記録する事柄</label><br>
+  <%= f.text_field :record_title %><br>
+  <label>期限</label><br>
+  <%= f.date_field :deadline_on %><br>
+  <%= f.submit "Create" %>
+  <%= link_to "Back", new_record_path %>
+<% end %>

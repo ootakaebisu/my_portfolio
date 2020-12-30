@@ -1,9 +1,9 @@
 <h1>Missions#show</h1>
 <%#= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission } %>
 
-
 <!--status："doing"のMissionがある時-->
 <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
+
   <label>Work Space</label><br>
   <% if @mission.small_goals.present? && @mission.small_goals.where(status: "doing").present? %>
     <%= @mission.small_goals.where(status: "doing").first.title %>
@@ -49,6 +49,74 @@
         <%= time_attack.diff %>
       <% end %><br>
     <% end %>
+
+    <!--後々JSのポップアップにする部分-->
+    <!--ミッション概要部分-->
+    <div>
+      <%= @mission.title %>
+      <% if @mission.deadline_on.present? %>
+        <%= @mission.deadline_on %>
+      <% end %>
+      <%= link_to "(鉛筆icon)", edit_mission_path(@mission.id) %>
+    </div>
+
+    <!--スモールゴール部分-->
+    <div>
+      <label>Small Goal</label>
+      <!--表示-->
+        <!--スモールゴールがある時-->
+        <% if @mission.small_goals.present? %>
+          <% @mission.small_goals.each do |small_goal| %>
+
+            <!--スモールゴールタイトル-->
+            <%= small_goal.title %>
+
+            <!--スモールゴール期日(あれば)-->
+            <% if small_goal.deadline_on.present? %>
+              <%= small_goal.deadline_on %>
+            <% end %>
+
+            <!--スモールゴールの着手状況とその変更-->
+              <% if small_goal.status == "before" %>
+                <%= form_with model: small_goal, local: true do |f| %>
+                  <%= f.hidden_field :status, :value => "doing" %>
+                  <%= f.submit "Start" %>
+                <% end %>
+              <% elsif small_goal.status == "doing" %>
+                <%= form_with model: small_goal, local: true do |f| %>
+                  <%= f.hidden_field :status, :value => "after" %>
+                  <%= f.submit "Finish" %>
+                <% end %>
+              <% elsif small_goal.status == "after" %>
+                <p>Clear!</p>
+              <% end %>
+
+            <!--スモールゴールの削除(status:before/doing時)orステータスを着手前に戻す(status:after時)-->
+              <% if small_goal.status == "before" || small_goal.status == "doing" %>
+                <%= link_to "(×)", small_goal_path(small_goal.id), method: :delete %>
+              <% elsif small_goal.status == "after" %>
+                <%= form_with model: small_goal, local: true do |f| %>
+                  <%= f.hidden_field :status, :value => "before" %>
+                  <%= f.submit "(←)" %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+        <!--スモールゴールがない時-->
+        <% else %>
+          <p>スモールゴールが登録されていません</p>
+        <% end %>
+
+      <!--作成-->
+        <%= form_with model: @small_goal, url:small_goals_path, local: true do |f| %>
+          <%= f.hidden_field :mission_id, :value => @mission.id %>
+          <%= f.text_field :title %>
+          <%= f.date_field :deadline_on %>
+          <%= f.submit %>
+        <% end %>
+    </div>
+
+
 
 <!--status："doing"のMissionがない時-->
 <% else %>

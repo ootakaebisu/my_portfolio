@@ -1,11 +1,12 @@
-<div>
-  <label><%= mission.title %></label><br>
-  <label>(ランクのバロメータ)</label><br>
-  <label>RANK</label><br>
-  <label>Total : <%= mission.time_attacks.count + mission.records.count %></label><br>
-  <label>Continuation</label><br>
-  <label>Recovery</label>
-</div>
+<% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
+  <div>
+    <label><%= mission.title %></label><br>
+    <label>(ランクのバロメータ)</label><br>
+    <label>RANK</label><br>
+    <label>Total : <%= mission.time_attacks.count + mission.records.count %></label><br>
+    <label>Continuation</label><br>
+    <label>Recovery</label>
+  </div>
 
 <div>
   <label>Today's All Tasks</label><br>
@@ -20,13 +21,17 @@
       <% end %>
     <% end %>
   </div>
+<% end %>
 
   <div>
     <%= link_to "Record", new_record_path %><br>
-    <%= link_to "Time Attack", mission_path %><br>
-    <%= link_to "Calendar", calendar_path %><br>
-    <%= link_to "Log", records_path %><br>
-    <%= link_to "Gantt", gantt_path %>
+
+    <% if current_user.missions.present? %>
+      <%= link_to "Time Attack", mission_path(current_user.missions.last.id) %><br>
+      <%= link_to "Calendar", calendar_path %><br>
+      <%= link_to "Log", records_path %><br>
+      <%= link_to "Gantt", gantt_path %>
+    <% end %>
   </div>
 
 
