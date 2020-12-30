@@ -1,7 +1,10 @@
 class RecordsController < ApplicationController
-  def calendar
+  def new
   end
 
-  def show
+  def create
+  end
+
+  def index
   end
 end

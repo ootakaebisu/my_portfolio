@@ -24,8 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :time_attacks, only:[:new, :create, :update, :index]
-  resources :records, only:[:index]
+  resources :time_attacks, only:[:create, :update, :index]
+  resources :records, only:[:new, :create, :index]
   resources :calendars, only:[:show, :create, :update]
   resources :gantts, only:[:show, :create, :edit, :update]
 end

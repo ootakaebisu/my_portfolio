@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_12_26_094057) do
   create_table "small_goals", force: :cascade do |t|
     t.integer "mission_id"
     t.string "title"
-    t.date "deadline_"
+    t.date "deadline_on"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_12_26_094057) do
     t.integer "mission_id"
     t.string "title"
     t.datetime "deadline_at"
-    t.string "diff_at"
+    t.string "diff"
     t.datetime "finish_at"
     t.integer "status", default: 0
     t.datetime "created_at", null: false

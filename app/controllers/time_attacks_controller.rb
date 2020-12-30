@@ -1,7 +1,5 @@
 class TimeAttacksController < ApplicationController
 
-  def new
-  end
 
   def create
     @time_attack = TimeAttack.new(time_attack_params)
@@ -24,7 +22,7 @@ class TimeAttacksController < ApplicationController
     elsif @time_attack_created.status == "after"
       require "date"
       @time_attack_created.finish_at = DateTime.now
-      
+
       # Finishを押した時間から自分が定めた設定時間を引いた秒数を整数で取得
       sec = @time_attack_created.finish_at.to_i - @time_attack_created.deadline_at.to_i
       # secの絶対値を使って差分を出す
@@ -37,9 +35,9 @@ class TimeAttacksController < ApplicationController
       end
       # secの正と負を文字列に追加
       if sec >= 0
-        @time_attack_created.diff_at = "＋" + diff
+        @time_attack_created.diff = "＋" + diff
       else
-        @time_attack_created.diff_at = "－" + diff
+        @time_attack_created.diff = "－" + diff
       end
 
       @time_attack_created.update(time_attack_params)

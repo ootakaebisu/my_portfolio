@@ -4,7 +4,7 @@ class CreateTimeAttacks < ActiveRecord::Migration[5.2]
       t.integer :mission_id
       t.string :title
       t.datetime :deadline_at
-      t.string :diff_at
+      t.string :diff
       t.datetime :finish_at
       t.integer :status, default: 0
 
