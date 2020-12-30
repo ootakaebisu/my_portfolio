@@ -16,10 +16,10 @@ User.create!(
     is_deleted: false
   )
 
-Mission.create!(
-  user_id: 1,
-  title: 'PF制作',
-  record_title: '終了タスク名',
-  deadline_on: 12/31
-)
+# Mission.create!(
+#   user_id: 1,
+#   title: 'PF制作',
+#   record_title: '終了タスク名',
+#   deadline_on: 12/31
+# )
 
