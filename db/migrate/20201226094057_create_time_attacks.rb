@@ -3,8 +3,11 @@ class CreateTimeAttacks < ActiveRecord::Migration[5.2]
     create_table :time_attacks do |t|
       t.integer :mission_id
       t.string :title
-      t.datetime :deadline
-      t.integer :status
+      t.datetime :deadline_at
+      t.string :diff
+      t.datetime :finish_at
+      t.integer :status, default: 0
+
 
       t.timestamps
     end

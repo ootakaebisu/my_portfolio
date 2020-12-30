@@ -4,7 +4,7 @@ class CreateMissions < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.string :title
       t.string :record_title
-      t.date :deadline
+      t.date :deadline_on
       t.integer :continuation
       t.integer :recovery
       t.integer :small_goal_clear
