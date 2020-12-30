@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'daily_clears/show'
   root 'homes#top'
   devise_for :users
   resources :users, only:[:show, :index, :edit, :update] do
@@ -17,15 +18,15 @@ Rails.application.routes.draw do
   resources :missions, only:[:new, :create, :show, :edit, :update] do
     collection do
       get :result
-      get :daily_clear
     end
     member do
       get :complete
     end
   end
 
+  resources :daily_clears, only:[:show, :create, :update]
   resources :time_attacks, only:[:create, :update, :index]
-  resources :records, only:[:new, :create, :index]
+  resources :records, only:[:new, :create, :index, :destroy]
   resources :calendars, only:[:show, :create, :update]
   resources :gantts, only:[:show, :create, :edit, :update]
 end

@@ -1,2 +1,27 @@
-<h1>Records#show</h1>
-<p>Find me in app/views/records/show.html.erb</p>
+<h1>Records#new</h1>
+<%#= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission } %>
+
+<label>Work Space</label><br>
+<% if @mission.small_goals.present? && @mission.small_goals.where(status: "doing").present? %>
+  <%= @mission.small_goals.where(status: "doing").first.title %>
+<% else %>
+  <%= @mission.title %>
+<% end %><br>
+
+  <%= "Total " + @daily_records.to_s %><br>
+  <label>Record</label>
+  <%= link_to "TimeAttackへ", mission_path(@mission.id) %>
+
+  <!--作成/Recordデータ-->
+  <%= form_with model: @record, local: true do |f| %>
+    <%= f.hidden_field :mission_id, :value => @mission.id %>
+    <%= f.text_field :title %>
+    <%= f.submit "Record" %>
+  <% end %>
+
+  <!--表示/Recordデータ-->
+  <% @records.each do |record| %>
+    <%= record.title %>
+    <%= link_to '×', record_path(record.id), method: :delete %>
+  <% end %>
+

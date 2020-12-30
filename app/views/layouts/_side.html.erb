@@ -1,0 +1,40 @@
+<div>
+  <label><%= mission.title %></label><br>
+  <label>(ランクのバロメータ)</label><br>
+  <label>RANK</label><br>
+  <label>Total : <%= mission.time_attacks.count + mission.records.count %></label><br>
+  <label>Continuation</label><br>
+  <label>Recovery</label>
+</div>
+
+<div>
+  <label>Today's All Tasks</label><br>
+    <!--当日クリア済みの時-->
+    <% if daily_clear_status.present? && daily_clear_status.status == "clear" %>
+      <%= "Clear!" %>
+    <!--当日未クリアの時-->
+    <% else %>
+      <%= form_with model: daily_clear, url:  daily_clears_path, local: true do |f| %>
+        <%= f.hidden_field :status, :value => "clear" %>
+        <%= f.submit "Clear" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to "Record", new_record_path %><br>
+    <%= link_to "Time Attack", mission_path %><br>
+    <%= link_to "Calendar", calendar_path %><br>
+    <%= link_to "Log", records_path %><br>
+    <%= link_to "Gantt", gantt_path %>
+  </div>
+
+
+<!--呼び出し時参考/ビュー-->
+<%#= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission } %>
+<!--呼び出し時参考/コントローラ-->
+<!--@mission = Mission.find_by(user_id: current_user.id, status: "doing")-->
+<!--@daily_clear = DailyClear.new-->
+<!--@daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)-->
+
+

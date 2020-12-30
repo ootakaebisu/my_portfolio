@@ -1,39 +1,49 @@
-<!--作成/TimeAttackデータ-->
-<%= form_with model: @time_attack, local: true do |f| %>
-  <%= f.hidden_field :mission_id, :value => @mission.id %>
-  <%= f.text_field :title %>
-  <%= f.datetime_field :deadline_at %>
+<%#= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission } %>
+<label>Work Space</label><br>
+<% if @mission.small_goals.present? && @mission.small_goals.where(status: "doing").present? %>
+  <%= @mission.small_goals.where(status: "doing").first.title %>
+<% else %>
+  <%= @mission.title %>
+<% end %><br>
 
-  <%= f.submit %>
-<% end %>
+  <%= "Total " + @daily_records.to_s %><br>
+  <label>Time Attack</label>
+  <%= link_to "Recordへ", new_record_path %>
 
-<!--表示/TimeAttackデータ-->
-<% @time_attacks.each do |time_attack| %>
-  <%= time_attack.title %>
+  <!--作成/TimeAttackデータ-->
+  <%= form_with model: @time_attack, local: true do |f| %>
+    <%= f.hidden_field :mission_id, :value => @mission.id %>
+    <%= f.text_field :title %>
+    <%= f.datetime_field :deadline_at %>
+    <%= f.submit "Set" %>
+  <% end %>
 
-  <!--ステータスによる表示内容の分岐-->
-  <!--実行前=>実行中-->
-  <% if time_attack.status == "before" %>
-    <%= l time_attack.deadline_at, format: :short%>
-    <%= form_with model: @time_attack_created, url: time_attack_path(time_attack.id), local: true do |f| %>
-      <%= f.hidden_field :status, :value => "doing" %>
-      <%= f.submit "Start" %>
-    <% end %>
+  <!--表示/TimeAttackデータ-->
+  <% @time_attacks.each do |time_attack| %>
+    <%= time_attack.title %>
 
-  <!--実行中=>終了-->
-  <% elsif time_attack.status == "doing" %>
-    <%= l time_attack.deadline_at, format: :short%>
-    <%= form_with model: @time_attack_created, url: time_attack_path(time_attack.id), local: true do |f| %>
-      <%= f.hidden_field :status, :value => "after" %>
-      <%= f.submit "Finish" %>
-    <% end %>
+    <!--ステータスによる表示内容の分岐-->
+    <!--実行前=>実行中-->
+    <% if time_attack.status == "before" %>
+      <%= l time_attack.deadline_at, format: :short%>
+      <%= form_with model: @time_attack_created, url: time_attack_path(time_attack.id), local: true do |f| %>
+        <%= f.hidden_field :status, :value => "doing" %>
+        <%= f.submit "Start" %>
+      <% end %>
 
-  <!--終了後-->
-  <% else %>
-    <%= time_attack.diff %>
-  <% end %><br>
+    <!--実行中=>終了-->
+    <% elsif time_attack.status == "doing" %>
+      <%= l time_attack.deadline_at, format: :short%>
+      <%= form_with model: @time_attack_created, url: time_attack_path(time_attack.id), local: true do |f| %>
+        <%= f.hidden_field :status, :value => "after" %>
+        <%= f.submit "Finish" %>
+      <% end %>
 
-<% end %>
+    <!--終了後-->
+    <% else %>
+      <%= time_attack.diff %>
+    <% end %><br>
+  <% end %>
 
 
 

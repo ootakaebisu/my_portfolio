@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_094057) do
+ActiveRecord::Schema.define(version: 2020_12_30_073321) do
+
+  create_table "daily_clears", force: :cascade do |t|
+    t.integer "mission_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "missions", force: :cascade do |t|
     t.integer "user_id"
