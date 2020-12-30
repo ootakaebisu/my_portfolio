@@ -1,5 +1,5 @@
 class GanttsController < ApplicationController
-  def show
+  def index
   end
   
   def create

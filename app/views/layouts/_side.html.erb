@@ -25,13 +25,13 @@
 
   <div>
     <%= link_to "Record", new_record_path %><br>
-
     <% if current_user.missions.present? %>
       <%= link_to "Time Attack", mission_path(current_user.missions.last.id) %><br>
-      <%= link_to "Calendar", calendar_path %><br>
-      <%= link_to "Log", records_path %><br>
-      <%= link_to "Gantt", gantt_path %>
     <% end %>
+      <%= link_to "Calendar", calendars_path %><br>
+      <%= link_to "Log", records_path %><br>
+      <%= link_to "Gantt", gantts_path %>
+
   </div>
 
 
