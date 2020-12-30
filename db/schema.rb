@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_073321) do
+ActiveRecord::Schema.define(version: 2020_12_30_191800) do
+
+  create_table "calendar_data", force: :cascade do |t|
+    t.string "title"
+    t.datetime "start_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "daily_clears", force: :cascade do |t|
     t.integer "mission_id"

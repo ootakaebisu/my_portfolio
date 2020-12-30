@@ -1,5 +1,5 @@
 <h1>Records#new</h1>
-<%#= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission } %>
+<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission } %>
 
 <!--status："doing"のMissionがある時-->
 <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
