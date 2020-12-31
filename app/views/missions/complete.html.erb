@@ -1,4 +1,27 @@
 <h1>Missions#complete</h1>
 
+<label>result</label><br>
+<label><%= @mission.title %></label><br>
+<label>Mission Complete!!!!!!!!</label><br>
+<label><%= "Total " + @records.to_s %></label><br>
 
+<label>Record</label><br>
+<label>Continuation</label><br>
+<label>Recovery</label><br>
 
+<label>
+  <% if @diff < 0 %>
+    最終締め切り
+    <%= @mission.deadline_on %>
+    より
+    <%= @diff %>日早く達成!(/1を取り除く必要あり)
+  <% end %>
+</label><br>
+
+<label>
+  <% if @mission.small_goals.present? && @mission.small_goals.where(status: "after").present? %>
+    <%= @mission.small_goals.where(status: "after").count %>個のスモールゴールを達成!
+  <% end %>
+</label><br>
+
+<%= link_to "Homeへ", new_record_path %>

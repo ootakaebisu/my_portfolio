@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :missions, only:[:new, :create, :show, :edit, :update] do
+  resources :missions, only:[:new, :create, :show, :edit, :update, :destroy] do
     collection do
       get :result
     end
