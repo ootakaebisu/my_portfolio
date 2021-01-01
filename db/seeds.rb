@@ -15,11 +15,20 @@ User.create!(
     profile_image_id: 'a',
     is_deleted: false
   )
+  
+  User.create!(
+    my_id: 'mendako2',
+    password: "000000",
+    name: 'メンダコ2',
+    email: "mendako2@gmail.com",
+    profile_image_id: 'a',
+    is_deleted: false
+  )
 
-# Mission.create!(
-#   user_id: 1,
-#   title: 'PF制作',
-#   record_title: '終了タスク名',
-#   deadline_on: 12/31
-# )
+Mission.create!(
+  user_id: 1,
+  title: 'PF制作',
+  record_title: '終了タスク名',
+  deadline_on: 12/31
+)
 

@@ -1,0 +1,25 @@
+<h1>Users#public_page</h1>
+
+<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: @user } %>
+
+<label>Public Page</label>
+<% if @user.id == current_user.id %>
+	<%= link_to 'Edit', edit_user_path(@user), class: "" %>
+<% else %>
+	<% if current_user.following?(@user) %>
+    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "" %>
+  <% else %>
+    <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class: "" %>
+  <% end %>
+<% end %>
+
+<%= render "user", { user: @user, mission: @mission, records: @records } %>
+
+<% if @user.link.present? %>
+  <label>外部リンク</label><br>
+  <%= @user.link %><br>
+<% end %>
+
+<% unless @user.id == current_user.id %>
+	<%= link_to 'ユーザー一覧へ', users_path, class: "" %>
+<% end %>

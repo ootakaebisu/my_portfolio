@@ -1,0 +1,33 @@
+
+<%#= @user.profile_image_id %>
+<%= user.name %>
+<%= user.my_id %><br>
+
+<% if user.missions.present? && user.missions.find_by(user_id: current_user.id, status: "doing") %>
+  <% if mission.deadline_on.present? %>
+    <%= mission.deadline_on %>までに<%= mission.title %><br>
+    <label>ミッション進捗</label><br>
+  <% end %>
+  <label>継続日数 : </label><br>
+  <label>リカバリー回数 : </label><br>
+  <label>記録回数 : <%= records %></label><br>
+<% end %>
+
+<!--ビューの呼び出し部分-->
+<%#= link_to user.name, public_page_user_path(user) %>
+
+<!--コントローラの呼び出し部分-->
+<!--@user = User.find(params[:id])-->
+<!--if @user.missions.present? && @user.missions.find_by(user_id: @user.id, status: "doing").present?-->
+<!--  # 総記録数の計算(nilの場合の処理)-->
+<!--  @mission = @user.missions.where(user_id: @user.id, status: "doing").last-->
+<!--  if @mission.records.present? && @mission.time_attacks.present?-->
+<!--    @records = @mission.records.count + @mission.time_attacks.count-->
+<!--  elsif @mission.records.present? && @mission.time_attacks.nil?-->
+<!--    @records = @mission..records.count-->
+<!--  elsif @mission.records.nil? && @mission.time_attacks.present?-->
+<!--    @records = @mission.time_attacks.count-->
+<!--  else-->
+<!--    @records = 0-->
+<!--  end-->
+<!--end-->

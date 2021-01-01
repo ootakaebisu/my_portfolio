@@ -8,10 +8,10 @@ Rails.application.routes.draw do
       get :result
       get :unsubscribe
       patch :withdraw
-      get :follow_users
     end
     member do
-      get :public
+      get :public_page
+      get :follow_users
     end
   end
 
@@ -23,6 +23,9 @@ Rails.application.routes.draw do
       get :complete
     end
   end
+
+  post 'create/:id' => 'relationships#create', as: 'follow' # フォローする
+  post 'destroy/:id' => 'relationships#destroy', as: 'unfollow' # フォロー外す
 
   resources :daily_clears, only:[:show, :create, :update]
   resources :time_attacks, only:[:create, :update, :index]
