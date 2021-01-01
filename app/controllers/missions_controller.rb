@@ -74,7 +74,7 @@ class MissionsController < ApplicationController
     d1 = @mission.updated_at
     d2 = @mission.deadline_on
     @diff = Date.parse(d1.to_s) - d2
-    
+
   end
 
   def destroy

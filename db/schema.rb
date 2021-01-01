@@ -49,13 +49,11 @@ ActiveRecord::Schema.define(version: 2020_12_30_191800) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "follow_id"
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follow_id"], name: "index_relationships_on_follow_id"
-    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
-    t.index ["user_id"], name: "index_relationships_on_user_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
   create_table "small_goals", force: :cascade do |t|
@@ -87,6 +85,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_191800) do
     t.string "name"
     t.string "email"
     t.string "profile_image_id"
+    t.text "content"
     t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

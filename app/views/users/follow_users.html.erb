@@ -1,2 +1,38 @@
 <h1>Users#follow_users</h1>
-<p>Find me in app/views/users/follow_users.html.erb</p>
+
+<% if @users.length > 0 %>
+  <!--users#indexと同じ条件をフォローしている全ユーザに限定して適用-->
+  <% @users.each do |user| %>
+    <div>
+      <!--進行中ミッションがある場合のmissionとrecordsの定義-->
+      <% if user.missions.present? && user.missions.find_by(user_id: user.id, status: "doing").present? %>
+        <% mission = user.missions.where(user_id: user.id, status: "doing").last %>
+        <% if mission.records.present? && mission.time_attacks.present? %>
+          <% records = mission.records.count + mission.time_attacks.count %>
+        <% elsif mission.records.present? && mission.time_attacks.nil? %>
+          <% records = mission.records.count %>
+        <% elsif mission.records.nil? && mission.time_attacks.present? %>
+          <% records = mission.time_attacks.count %>
+        <% else %>
+          <% records = 0 %>
+        <% end %>
+      <% end %>
+
+      <!--部分テンプレートの呼び出し(mission/recordsが定義されているか否かで場合分け)-->
+      <% if user.missions.present? && user.missions.find_by(user_id: user.id, status: "doing").present? %>
+         <%= link_to public_page_user_path(user) do %>
+          <%#= user.name %>
+          <%= render "user", { user: user, mission: mission, records: records } %>
+        <% end %>
+      <% else %>
+        <%= link_to public_page_user_path(user) do %>
+          <%#= user.name %>
+          <%= render "user", { user: user } %>
+        <% end %>
+      <% end %>
+    </div><br>
+  <% end %>
+
+<% else %>
+  <%= "ユーザーはいません" %>
+<% end %>

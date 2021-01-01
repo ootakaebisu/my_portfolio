@@ -4,23 +4,25 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :missions, dependent: :destroy
-  
-  has_many :relationships
-  has_many :followings, through: :relationships, source: :follow
-  
-  def follow(other_user)
-    unless self == other_user
-      self.relationships.find_or_create_by(follow_id: other_user.id)
-    end
+  accepts_nested_attributes_for :missions
+
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy # フォロー取得
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy # フォロワー取得
+  has_many :following_users, through: :follower, source: :followed # 自分がフォローしている人
+  has_many :follower_users, through: :followed, source: :follower # 自分をフォローしている人
+
+  # ユーザーをフォローする
+  def follow(user_id)
+    follower.create(followed_id: user_id)
   end
 
-  def unfollow(other_user)
-    relationship = self.relationships.find_by(follow_id: other_user.id)
-    relationship.destroy if relationship
+  # ユーザーのフォローを外す
+  def unfollow(user_id)
+    follower.find_by(followed_id: user_id).destroy
   end
 
-  def following?(other_user)
-    self.followings.include?(other_user)
+  # フォローしていればtrueを返す
+  def following?(user)
+    following_users.include?(user)
   end
-  
 end

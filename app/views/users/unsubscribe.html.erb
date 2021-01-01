@@ -1,2 +1,8 @@
 <h1>Users#unsubscribe</h1>
-<p>Find me in app/views/users/unsubscribe.html.erb</p>
+
+<label>全ての記録が閲覧できなくなりますがよろしいですか？</label>
+<p>これまでの終了タスク数、継続記録、リカバリー記録、フォロー情報など<br>
+全ての記録、および会員情報鵜にアクセスできなくなります。</p>
+
+<%= link_to "マイページへ", user_path(@user) %>
+<%= link_to "退会する", withdraw_users_path, method: :patch %>
