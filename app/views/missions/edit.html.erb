@@ -1,6 +1,6 @@
 <h1>Missions#edit</h1>
 
-<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission } %>
+<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
 
 <label>ミッション管理</label>
 <%= link_to "Back", new_record_path %>

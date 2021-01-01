@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_191800) do
     t.string "name"
     t.string "email"
     t.string "profile_image_id"
-    t.text "link"
+    t.text "content"
     t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

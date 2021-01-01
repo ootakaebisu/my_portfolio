@@ -4,7 +4,7 @@
 
 <label>Public Page</label>
 <% if @user.id == current_user.id %>
-	<%= link_to 'Edit', edit_user_path(@user), class: "" %>
+	<%= link_to 'Edit', edit_user_path(id: @user, order_sort: "0"), class: "" %>
 <% else %>
 	<% if current_user.following?(@user) %>
     <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "" %>
@@ -15,9 +15,9 @@
 
 <%= render "user", { user: @user, mission: @mission, records: @records } %>
 
-<% if @user.link.present? %>
-  <label>外部リンク</label><br>
-  <%= @user.link %><br>
+<% if @user.content.present? %>
+  <label>ユーザープロフィール</label><br>
+  <%= @user.content %><br>
 <% end %>
 
 <% unless @user.id == current_user.id %>
