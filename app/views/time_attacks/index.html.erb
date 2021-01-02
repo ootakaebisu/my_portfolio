@@ -1,2 +1,37 @@
 <h1>TimeAttacks#index</h1>
-<p>Find me in app/views/time_attacks/index.html.erb</p>
+
+<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
+
+<%= link_to "Record 一覧へ(現在のミッション)", records_path %>
+
+<% if @mission.present? && @mission.time_attacks.present? %>
+  <% @time_attacks.each do |time_attack| %>
+    <table>
+      <tbody>
+        <tr>
+          <td><%= l time_attack.created_at, format: :date %></td>
+          <td><%= time_attack.title %></td>
+          <td><%= time_attack.diff %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% else %>
+  <div>記録はありません</div>
+<% end %>
+
+<!--終了ミッション一覧-->
+<% if @finish_missions.present? %>
+  <% @finish_missions.each_with_index do |fm, n| %>
+    <%= link_to time_attacks_path(order_sort: "#{n + 1}") do %>
+      <table>
+        <tbody>
+          <tr>
+            <td><%= l fm.created_at, format: :year_date %> - <%= l fm.updated_at, format: :year_date %></td>
+            <td><%= fm.title %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+<% end %>

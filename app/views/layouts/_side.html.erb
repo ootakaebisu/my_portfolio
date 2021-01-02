@@ -17,7 +17,7 @@
         <%= "Clear!" %>
       <!--当日未クリアの時-->
       <% else %>
-        <%= form_with model: daily_clear, url:  daily_clears_path, local: true do |f| %>
+        <%= form_with model: daily_clear, url: daily_clears_path, local: true do |f| %>
           <%= f.hidden_field :status, :value => "clear" %>
           <%= f.submit "Clear" %>
         <% end %>
