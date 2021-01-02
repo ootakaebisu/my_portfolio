@@ -45,6 +45,35 @@ class TimeAttacksController < ApplicationController
   end
 
   def index
+    # 以下終了済みミッションのタイムアタック表示の記述箇所
+    if Mission.where(user_id: current_user.id, status: "after").present?
+      @finish_missions = Mission.where(user_id: current_user.id, status: "after")
+      i = @finish_missions.count #範囲オブジェクトの上限値として使うために終了済みミッションの個数をiと定義
+      @n = params[:order_sort].to_i
+    end
+    case @n
+    when 1..i #order_sortが1~iの時
+      @mission = Mission.find(@n)
+      # @record_paginate = @record_count.page(params[:page]).per(8) #whereで取り出したデータにページネーションを適用
+
+    #以下最新ミッションのレコード表示の記述箇所(order_sortがnil)
+    else
+      @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+      @daily_clear = DailyClear.new
+      if @mission.present? && @mission.daily_clears.present? && @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).present?
+        @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+      end
+      # @record_paginate = Item.page(params[:page]).per(8)
+    end
+
+    if @mission.present? && @mission.records.present?
+      @records = @mission.records
+    end
+    
+    if @mission.present? && @mission.time_attacks.present?
+      @time_attacks = @mission.time_attacks
+    end
+
   end
 
   protected
