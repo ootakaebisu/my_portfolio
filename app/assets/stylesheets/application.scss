@@ -1,0 +1,149 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require fullcalendar
+ */
+@import "bootstrap";
+
+*{
+  color: #424242;
+  background-color: #EFEFEF;
+}
+
+.background {
+  background-color: #EFEFEF;
+}
+
+header {
+  height: 70px;
+}
+
+hr {
+   border-width: 1px 0px 0px 0px; /* 太さ */
+   border-style: solid; /* 線種 */
+   border-color: #424242;   /* 線色 */
+  // height: 1px;         /* 高さ(※古いIE用) */
+}
+
+// footerの下部固定css
+.footerFixed{
+    min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+    position: relative;/* ←相対位置 */
+    padding-bottom: 70px;/* ←フッターの高さを指定 */
+    box-sizing: border-box;
+    /* ↑ヘッダーやフッターを含むすべての要素の高さ＝min-height:100vhになるように指定 */
+}
+
+footer {
+  position: absolute;/* ←絶対位置 */
+  bottom: 0;
+  width: 100%;
+  padding: 35px 0;
+  margin-top: 10px;
+}
+
+a { display: block; } //リンクの反応範囲の拡張
+a:link { color: #424242; } //  未訪問のリンク
+a:visited { color: #424242; } //  訪問済みのリンク
+a:hover {
+  background-color: #d6d6d6;
+  text-decoration: none !important;
+} //  ポイント時のリンク
+// a:active { color: #ff8000;}
+
+// 複数回参照する可能性のあるクラス群
+// 複数回参照する可能性のあるクラス群
+.main_title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sub_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+// ニューモフィズム
+.ou {
+ border-radius: 7px;
+ background: #efefef;
+ box-shadow: inset 7px 7px 15px #d7d7d7,
+            inset -7px -7px 15px #ffffff;
+  padding: 20px 25px 20px 25px;
+  margin: 30px
+}
+
+.btn_ou {
+ border-radius: 7px;
+ background: #efefef;
+ box-shadow: inset 5px 5px 7px #e1e1e1,
+             inset -5px -5px 7px #fdfdfd;
+ padding: 8px 25px;
+ border: 0 none;
+ background: #525252;
+ color: #FFFFFF;
+}
+
+.totsu {
+ border-radius: 7px;
+ background: #efefef;
+ box-shadow:  7px 7px 15px #d7d7d7,
+             -7px -7px 15px #ffffff;
+  padding: 20px 25px 20px 25px;
+  margin: 30pxx;
+}
+
+.btn_totsu {
+ border-radius: 7px;
+ background: #efefef;
+ box-shadow:  5px 5px 15px #d7d7d7,
+             -5px -5px 15px #ffffff;
+ padding: 8px 25px;
+ border: 0 none;
+ background: #525252;
+ color: #FFFFFF;
+}
+
+.test {
+  background-color: #ca9aff;
+  background-image: -webkit-linear-gradient(36deg, #ca9aff 0%, #ffb09e 100%);
+  background-image: -moz-linear-gradient(36deg, #ca9aff 0%, #ffb09e 100%);
+  background-image: -o-linear-gradient(36deg, #ca9aff 0%, #ffb09e 100%);
+  background-image: linear-gradient(126deg, #ca9aff 0%, #ffb09e 100%);
+}
+
+
+
+// 通常ボタン
+.btn {
+  border-radius: 7px;
+  padding: 8px 25px;
+  border: 0 none;
+  background: #525252;
+  color: #FFFFFF;
+}
+
+.btn:hover {
+  background: #00c2b2;
+  // cursor : pointer;
+}
+
+//送信ボタン
+.send_btn {
+
+  background: #525252;
+  color: #FFFFFF;
+}
