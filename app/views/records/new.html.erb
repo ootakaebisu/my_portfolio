@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col-sm-3">
-    <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
+    <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
+      <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
+    <% else %>
+       <%= render 'layouts/side', { user: current_user } %>
+    <% end %>
   </div>
 
   <div class="col-sm-9">
