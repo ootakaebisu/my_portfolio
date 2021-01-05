@@ -6,7 +6,7 @@
         <% if user.missions.present? && user.missions.find_by(status: "doing").present? %>
           <div class="row mr-0 ml-0">
             <div class="totsu col-sm-12">
-              <% mission = current_user.missions.where(status: "doing").last %>
+              <% mission = user.missions.where(status: "doing").last %>
               <label><%= mission.title %></label><br>
               <label>(ランクのバロメータ)</label><br>
               <label>RANK</label><br>
@@ -35,7 +35,7 @@
           </div>
         <% else %>
           <div class="row mr-0 ml-0">
-            現在実行中のミッションはありません
+            現在実行中のミッションは<br>ありません
           </div>
         <% end %>
       </div>
@@ -58,10 +58,14 @@
 
 <!--呼び出し時参考/ビュー-->
 <%#= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: } %>
-<!--呼び出し時参考/コントローラ-->
-<!--@mission = Mission.find_by(user_id: current_user.id, status: "doing")-->
-<!--@daily_clear = DailyClear.new-->
-<!--@daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)-->
-<!--@user = User.find(params[:id])-->
 
+<!--呼び出し時参考/コントローラ-->
+
+<!--# ここから/部分テンプレート呼び出し-->
+<!--if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?-->
+<!--  @mission = Mission.find_by(user_id: current_user.id, status: "doing")-->
+<!--  @daily_clear = DailyClear.new-->
+<!--  @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)-->
+<!--end-->
+<!--# ここまで/部分テンプレート呼び出し-->
 

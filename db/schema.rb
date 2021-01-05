@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_191800) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "my_id", null: false
+    t.string "my_id", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

@@ -1,45 +1,53 @@
-<h1>Records#index</h1>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user:current_user } %>
+  </div>
+  
+  <div class="col-sm-9">
+    <label>Log</label>
+    <p>Record Log</p>
 
-<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user:current_user } %>
+    <%= link_to "Time Attack Log 一覧へ(現在のミッション)", time_attacks_path %>
 
-<label>Log</label>
-<p>Record Log</p>
+    <%# if params[:order_sort] == @n %>
+      <%#= link_to @mission.title , records_path(order_sort: @n) %>
+    <%# end %>
 
-<%= link_to "Time Attack Log 一覧へ(現在のミッション)", time_attacks_path %>
-
-<%# if params[:order_sort] == @n %>
-  <%#= link_to @mission.title , records_path(order_sort: @n) %>
-<%# end %>
-
-<% if @mission.present? && @mission.records.present? %>
-  <% @records.each do |record| %>
-    <table>
-      <tbody>
-        <tr>
-          <td><%= l record.created_at, format: :date %></td>
-          <td><%= record.title %></td>
-        </tr>
-      </tbody>
-    </table>
-  <% end %>
-<% else %>
-  <div>記録はありません</div>
-<% end %>
-
-<!--終了ミッション一覧-->
-<% if @finish_missions.present? %>
-  <% @finish_missions.each_with_index do |fm, n| %>
-    <%= link_to records_path(order_sort: "#{n + 1}") do %>
-      <table>
-        <tbody>
-          <tr>
-            <td><%= l fm.created_at, format: :year_date %> - <%= l fm.updated_at, format: :year_date %></td>
-            <td><%= fm.title %></td>
-          </tr>
-        </tbody>
-      </table>
+    <% if @mission.present? && @mission.records.present? %>
+      <% @records.each do |record| %>
+        <table>
+          <tbody>
+            <tr>
+              <td><%= l record.created_at, format: :date %></td>
+              <td><%= record.title %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <div>記録はありません</div>
     <% end %>
-  <% end %>
-<% end %>
+
+    <!--終了ミッション一覧-->
+    <% if @finish_missions.present? %>
+      <% @finish_missions.each_with_index do |fm, n| %>
+        <%= link_to records_path(order_sort: "#{n + 1}") do %>
+          <table>
+            <tbody>
+              <tr>
+                <td><%= l fm.created_at, format: :year_date %> - <%= l fm.updated_at, format: :year_date %></td>
+                <td><%= fm.title %></td>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
 
 

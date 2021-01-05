@@ -1,38 +1,45 @@
-<h1>Users#edit</h1>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: @user } %>
+  </div>
+  
+  <div class="col-sm-9">
+    <% if params[:order_sort] == "0" %>
+      <!--public_pageから飛んできた時-->
+      <label>Public Page(編集)</label>
+      <%= form_for @user do |f| %>
+        <label>ユーザー名</label>
+        <%= f.text_field :name %>
+        <label>ユーザーID</label>
+        <%= f.text_field :my_id %>
+        <%= f.fields_for :missions do |mission| %>
+          <label>ミッション内容</label>
+          <%= mission.text_field :title %>
+          <label>ミッション期限</label>
+          <%= mission.date_field :deadline_on %>
+          <%= mission.hidden_field :id, value: mission.object.id %>
+        <% end %>
+        <label>ユーザープロフィール</label>
+        <%= f.text_area :content %>
+        <%= f.submit "Save" %>
+      <% end %>
 
-<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: @user } %>
+    <% elsif params[:order_sort] == "1" %>
+      <!--showページから飛んできた時-->
+      <label>My Page(編集)</label>
 
-<% if params[:order_sort] == "0" %>
-  <!--public_pageから飛んできた時-->
-  <label>Public Page(編集)</label>
-  <%= form_for @user do |f| %>
-    <label>ユーザー名</label>
-    <%= f.text_field :name %>
-    <label>ユーザーID</label>
-    <%= f.text_field :my_id %>
-    <%= f.fields_for :missions do |mission| %>
-      <label>ミッション内容</label>
-      <%= mission.text_field :title %>
-      <label>ミッション期限</label>
-      <%= mission.date_field :deadline_on %>
-      <%= mission.hidden_field :id, value: mission.object.id %>
+      <%= form_for @user do |f| %>
+        <label>ユーザー名</label>
+        <%= f.text_field :name %>
+        <label>ユーザーID</label>
+        <%= f.text_field :my_id %>
+        <label>メールアドレス</label>
+        <%= f.text_field :email %>
+        <%= f.submit "Save" %>
+      <% end %>
     <% end %>
-    <label>ユーザープロフィール</label>
-    <%= f.text_area :content %>
-    <%= f.submit "Save" %>
-  <% end %>
+  </div>
+</div>
 
-<% elsif params[:order_sort] == "1" %>
-  <!--showページから飛んできた時-->
-  <label>My Page(編集)</label>
 
-  <%= form_for @user do |f| %>
-    <label>ユーザー名</label>
-    <%= f.text_field :name %>
-    <label>ユーザーID</label>
-    <%= f.text_field :my_id %>
-    <label>メールアドレス</label>
-    <%= f.text_field :email %>
-    <%= f.submit "Save" %>
-  <% end %>
-<% end %>
+

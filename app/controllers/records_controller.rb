@@ -1,17 +1,19 @@
 class RecordsController < ApplicationController
   def new
-    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+    if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
+      @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+      # 部分テンプレート用(side)
+      @daily_clear = DailyClear.new
+      @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    end
     if @mission.present? && @mission.time_attacks.present?
       @daily_records = @mission.time_attacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count + @mission.records.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count
     end
-    @record = Record.new
     if @mission.present? && @mission.records.present?
       @records = @mission.records.all
     end
+    @record = Record.new
     @small_goal = SmallGoal.new
-    # 部分テンプレート用(side)
-    @daily_clear = DailyClear.new
-    @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
   end
 
   def create

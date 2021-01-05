@@ -1,18 +1,34 @@
 class UsersController < ApplicationController
   def show
+    # ここから/部分テンプレート呼び出し
+    if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
+      @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+      @daily_clear = DailyClear.new
+      @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    end
+    # ここまで/部分テンプレート呼び出し
     @user = current_user
   end
 
   def index
     @users = User.all
-    # 部分テンプレuser呼び出し部分
-    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
-    @daily_clear = DailyClear.new
-    @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
-
+    # ここから/部分テンプレート呼び出し
+    if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
+      @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+      @daily_clear = DailyClear.new
+      @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    end
+    # ここまで/部分テンプレート呼び出し
   end
 
   def follow_users
+    # ここから/部分テンプレート呼び出し
+    if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
+      @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+      @daily_clear = DailyClear.new
+      @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    end
+    # ここまで/部分テンプレート呼び出し
     @user = User.find(params[:id])
     @users = @user.following_users
   end
@@ -33,9 +49,13 @@ class UsersController < ApplicationController
         @records = 0
       end
     end
-  # 部分テンプレuser呼び出し部分(side)
-    @daily_clear = DailyClear.new
-    @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    # ここから/部分テンプレート呼び出し
+    if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
+
+      @daily_clear = DailyClear.new
+      @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    end
+    # ここまで/部分テンプレート呼び出し
   end
 
   def update
@@ -78,10 +98,14 @@ class UsersController < ApplicationController
           @records = 0
         end
       end
-    # 部分テンプレuser呼び出し部分(side)
+      
       if @user == current_user
-        @daily_clear = DailyClear.new
-        @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+        # ここから/部分テンプレート呼び出し
+        if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
+          @daily_clear = DailyClear.new
+          @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+        end
+        # ここまで/部分テンプレート呼び出し
       end
   end
 
