@@ -7,7 +7,7 @@
 
     <!--status："doing"のMissionがある時-->
     <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
-      <label>Work Space</label><br>
+      <h2>Work Space</h2>
       <% if @mission.small_goals.present? && @mission.small_goals.where(status: "doing").present? %>
         <%= @mission.small_goals.where(status: "doing").first.title %>
       <% else %>

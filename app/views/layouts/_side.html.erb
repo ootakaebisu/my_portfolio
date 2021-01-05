@@ -27,7 +27,7 @@
                 <div>
                   <%= form_with model: daily_clear, url: daily_clears_path, local: true do |f| %>
                     <%= f.hidden_field :status, :value => "clear" %>
-                    <%= f.submit "Clear", class: "btn_totsu test col-sm-12" %>
+                    <%= f.submit "Clear", class: "btn_totsu color-1 col-sm-12", data: {confirm: "本日のタスクを全て完了しますか？"} %>
                   <% end %>
                 </div>
               <% end %>

@@ -16,6 +16,16 @@
  */
 @import "bootstrap";
 
+// # 変更前
+// body {
+//   background-image: url("hoge.jpg");
+// }
+
+// 変更後
+// body {
+//   background-image: image-url("hoge.jpg");
+// }
+
 *{
   color: #424242;
   background-color: #EFEFEF;
@@ -60,23 +70,40 @@ a:hover {
   background-color: #d6d6d6;
   text-decoration: none !important;
 } //  ポイント時のリンク
-// a:active { color: #ff8000;}
+// a:active { color: #424242;}
+
 
 // 複数回参照する可能性のあるクラス群
-// 複数回参照する可能性のあるクラス群
-.main_title {
+
+// 文字の大きさ(見出し類)
+h2 {
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.sub_title {
+h3 {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-// ニューモフィズム
+// ボタン
+.btn {
+  border-radius: 7px;
+  padding: 8px 25px;
+  border: 0 none;
+  background: #525252;
+  color: #FFFFFF;
+}
+
+// ボタンの挙動
+.btn_totsu:hover, .btn:hover {
+  opacity: 0.6 ;
+  cursor : pointer;
+}
+
+// ニューモフィズム(全4種類/凹or凸 × 通常div or btn)
 .ou {
  border-radius: 7px;
  background: #efefef;
@@ -117,33 +144,12 @@ a:hover {
  color: #FFFFFF;
 }
 
-.test {
+// CSSグラデーション
+// daily_clearボタン使用色
+.color-1 {
   background-color: #ca9aff;
   background-image: -webkit-linear-gradient(36deg, #ca9aff 0%, #ffb09e 100%);
   background-image: -moz-linear-gradient(36deg, #ca9aff 0%, #ffb09e 100%);
   background-image: -o-linear-gradient(36deg, #ca9aff 0%, #ffb09e 100%);
   background-image: linear-gradient(126deg, #ca9aff 0%, #ffb09e 100%);
-}
-
-
-
-// 通常ボタン
-.btn {
-  border-radius: 7px;
-  padding: 8px 25px;
-  border: 0 none;
-  background: #525252;
-  color: #FFFFFF;
-}
-
-.btn:hover {
-  background: #00c2b2;
-  // cursor : pointer;
-}
-
-//送信ボタン
-.send_btn {
-
-  background: #525252;
-  color: #FFFFFF;
 }

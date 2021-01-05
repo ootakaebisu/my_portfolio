@@ -1,17 +1,19 @@
 <div class="center">
   <div class="text-center">
-    <div class="sub_title">全ての記録が閲覧できなくなりますがよろしいですか？</div>
+    <h3>全ての記録が閲覧できなくなりますがよろしいですか？</h3>
     <p>これまでの終了タスク数、継続記録、リカバリー記録、フォロー情報など<br>
     全ての記録、および会員情報鵜にアクセスできなくなります。</p>
 
-    <%#= link_to "マイページへ", user_path(@user), class: "btn btn" %>
-    <%= link_to user_path(@user) do %>
-      <button type="button" class="btn">マイページへ</button>
-    <% end %>
-    <%#= link_to "退会する", withdraw_users_path, method: :patch %>
-    <%= link_to withdraw_users_path, method: :patch  do %>
-      <button type="button" class="btn">退会する</button>
-    <% end %>
+    <div class="d-flex flex-row">
+      <%#= link_to "マイページへ", user_path(@user), class: "btn btn" %>
+      <%= link_to user_path(@user) do %>
+        <button type="button" class="btn">マイページへ</button>
+      <% end %>
+      <%#= link_to "退会する", withdraw_users_path, method: :patch %>
+      <%= link_to withdraw_users_path, method: :patch  do %>
+        <button type="button" class="btn">退会する</button>
+      <% end %>
+    </div>
   </div>
 </div>
 
