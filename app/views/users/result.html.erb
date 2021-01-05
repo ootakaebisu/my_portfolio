@@ -1,7 +1,12 @@
-<h1>Users#result</h1>
+<div class="center">
+  <div class="text-center">
+    <h3>退会処理が完了しました</h3>
+    <p>ご利用ありがとうございました<br>
+    またのご利用をお待ちしております。</p>
 
-<label>退会処理が完了しました</label>
-<p>ご利用ありがとうございました。<br>
-またのご利用をお待ちしております。</p>
-
-<%= link_to "トップページへ", root_path %>
+    <%#= link_to "トップページへ", root_path %>
+    <%= link_to root_path do %>
+      <button type="button" class="btn btn-secondary">トップページへ</button>
+    <% end %>
+  </div>
+</div>

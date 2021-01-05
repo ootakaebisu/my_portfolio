@@ -9,6 +9,9 @@ class RecordsController < ApplicationController
       @records = @mission.records.all
     end
     @small_goal = SmallGoal.new
+    # 部分テンプレート用(side)
+    @daily_clear = DailyClear.new
+    @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
   end
 
   def create

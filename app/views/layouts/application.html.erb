@@ -10,15 +10,24 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <header>
-    <%= render "layouts/header" %>
-  </header>
-  <!--カレンダー機能追加/body タグに data-turbolinks 属性を追加-->
-  <body data-turbolinks="false">
-    <%= yield %>
-  </body>
-  <footer>
-    ©2021 Ootaka Ebisu
-  </footer>
+
+  <div class="background footerFixed">
+    <header>
+      <%= render "layouts/header" %>
+    </header>
+    <!--カレンダー機能追加/body タグに data-turbolinks 属性を追加-->
+    <body data-turbolinks="false">
+      <div class= "container-fluid mb-5">
+        <%= yield %>
+      </div>
+    </body>
+
+     <footer class="footer">
+      <!--bootstrap4のcontainerのデフォマージンが広かったのでcontainer-fluidへ変更-->
+      <div class ="container-fluid">
+        <p class="text-center mb-0">©2021 Ootaka Ebisu</p>
+      </div>
+    </footer>
+  </div>
 
 </html>
