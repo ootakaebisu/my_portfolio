@@ -8,7 +8,7 @@ class MissionsController < ApplicationController
     if @mission.save
       redirect_to result_missions_path(id: @mission.id)
     else
-      render 'new'
+      render :new
     end
 
   end

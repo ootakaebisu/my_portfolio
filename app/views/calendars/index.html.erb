@@ -1,6 +1,15 @@
-<h1>Calendars#show</h1>
-
-<div id="calendar"></div>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user:current_user } %>
+  </div>
+  <div class="col-sm-9">
+    <div class="row mr-0 ml-0">
+      <div class="col-sm-11">
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--<script>-->
 <!--  window.alert(`hello,${gon.calendar_data}!`);-->
