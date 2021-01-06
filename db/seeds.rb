@@ -15,7 +15,7 @@ User.create!(
     profile_image_id: 'a',
     is_deleted: false
   )
-  
+
   User.create!(
     my_id: 'mendako2',
     password: "000000",
@@ -31,4 +31,13 @@ Mission.create!(
   record_title: '終了タスク名',
   deadline_on: 12/31
 )
+
+Calendar.create!(
+  user_id: 1,
+  title: 'PF制作',
+  description: 'tesuto',
+  start_date: Time.now,
+  end_date: Time.now
+)
+
 
