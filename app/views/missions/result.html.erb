@@ -1,7 +1,20 @@
-<h1>Missions#result</h1>
+<div class="row">
+  <div class="col-sm-4 offset-sm-4 text-center totsu mt-4">
+    <h3 class="mt-4">Created Mission</h3>
 
-<label>Create Mission</label>
-<p>ミッションの作成が完了しました！<br>
-早速記録を開始しましょう</p>
+    <div class="row ml-0 mr-0 mb-3 mt-4">
+      <div class="text-center col-sm-12">
+        <p>ミッションの作成が完了しました！</p>
+        <p>早速記録を開始しましょう</p>
+      </div>
 
-<%= link_to "記録を開始する", mission_path(@mission) %>
+    </div>
+
+    <div class="row ml-0 mr-0 text-center">
+      <div class="col-sm-6 offset-sm-3">
+        <%= link_to "記録を開始する", mission_path(@mission), class: "btn mb-4" %>
+      </div>
+    </div>
+
+  </div>
+</div>

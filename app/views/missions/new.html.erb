@@ -1,13 +1,33 @@
-<h1>Missions#new</h1>
+<div class="row">
+  <div class="col-sm-4 offset-sm-4">
+    <h3 align="center">Missionのゴール設定</h3>
 
-<%= form_with model: @mission, url: missions_path, local: true do |f| %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-  <label>タイトル</label><br>
-  <%= f.text_field :title %><br>
-  <label>記録する事柄</label><br>
-  <%= f.text_field :record_title %><br>
-  <label>期限</label><br>
-  <%= f.date_field :deadline_on %><br>
-  <%= f.submit "Create" %>
-  <%= link_to "Back", new_record_path %>
-<% end %>
+    <%= form_with model: @mission, url: missions_path, local: true do |f| %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+
+      <div class="row ml-0 mr-0 mb-3 mt-4">
+        <label>タイトル</label><br>
+        <%= f.text_field :title, class: "col-sm-12 btn_ou" %><br>
+      </div>
+
+      <div class="row ml-0 mr-0 mb-3">
+        <label>記録する事柄</label><br>
+        <%= f.text_field :record_title, class: "col-sm-12 btn_ou"  %><br>
+      </div>
+
+      <div class="row ml-0 mr-0 mb-4">
+        <label>期限</label><br>
+        <%= f.date_field :deadline_on, class: "col-sm-12 btn_ou"  %><br>
+      </div>
+
+      <div class="row ml-0 mr-0 mb-3">
+        <%= f.submit "Create", class: "col-sm-6 offset-sm-3 btn"  %>
+      </div>
+
+      <div class="row ml-0 mr-0 text-center">
+        <%= link_to "Back", new_record_path, class: "col-sm-6 offset-sm-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -3,10 +3,11 @@
     <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: @user } %>
   </div>
 
-  <div class="col-sm-9">
-    <label>Public Page</label>
+  <div class="col-sm-9 pr-5">
+    <h2>Public Page</h2>
+    <hr>
     <% if @user.id == current_user.id %>
-    	<%= link_to 'Edit', edit_user_path(id: @user, order_sort: "0"), class: "" %>
+    	<%= link_to 'Edit', edit_user_path(id: @user, order_sort: "0"), class: "btn" %>
     <% else %>
     	<% if current_user.following?(@user) %>
         <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "" %>

@@ -6,6 +6,11 @@
   <div class="col-sm-9">
     <label>Users</label>
 
+    <%= form_with url: users_path, method: :get, local: true do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit :search %>
+    <% end %>
+
     <% @users.each do |user| %>
       <div>
         <!--進行中ミッションがある場合のmissionとrecordsの定義-->
