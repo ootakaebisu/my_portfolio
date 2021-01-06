@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def show
     # ここから/部分テンプレート呼び出し
     if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
@@ -11,7 +12,11 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    if params[:name].present?
+      @users = User.where('name LIKE ?', "%#{params[:name]}%")
+    else
+      @users = User.all
+    end
     # ここから/部分テンプレート呼び出し
     if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
       @mission = Mission.find_by(user_id: current_user.id, status: "doing")
@@ -98,7 +103,7 @@ class UsersController < ApplicationController
           @records = 0
         end
       end
-      
+
       if @user == current_user
         # ここから/部分テンプレート呼び出し
         if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
