@@ -1,6 +1,6 @@
-json.array!(@events) do |event|
-  json.extract! event, :id, :title, :body
-  json.start event.start_date
-  json.end event.end_date
-  json.url event_url(event, format: :html)
+json.array!(@calendars) do |calendar|
+  json.extract! calendar, :id, :title, :description
+  json.start calendar.start_date
+  json.end calendar.end_date
+  json.url calendar_url(calendar, format: :html)
 end
