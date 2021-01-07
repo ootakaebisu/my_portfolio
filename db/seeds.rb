@@ -12,7 +12,6 @@ User.create!(
     password: "000000",
     name: 'メンダコ',
     email: "mendako@gmail.com",
-    profile_image_id: 'a',
     is_deleted: false
   )
 
@@ -21,7 +20,6 @@ User.create!(
     password: "000000",
     name: 'メンダコ2',
     email: "mendako2@gmail.com",
-    profile_image_id: 'a',
     is_deleted: false
   )
 
