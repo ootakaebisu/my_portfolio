@@ -7,6 +7,27 @@
     <h2 class="left">Calendar</h2><br>
     <div class="line "></div>
 
+    <div class="">
+      <%= form_with model: @calendar, local: true do |f| %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <table class="row mr-0 ml-0">
+          <tbody class="col-sm-12">
+            <tr class="row mr-0 ml-0">
+              <td class="col-sm-4"><p>開始日時<%= f.datetime_field :start_date, class: "ml-2" %></p></td>
+              <td class="col-sm-7"><%= f.text_field :title, class: "col-sm-12 btn_ou" %></td>
+              <td rowspan="2" class="col-sm-1"><%= f.submit "+", class: "btn" %></td>
+            </tr>
+            <tr class="row mr-0 ml-0">
+              <td class="col-sm-4"><p>開始日時<%= f.datetime_field :end_date, class: "ml-2"  %></p></td>
+              <td class="col-sm-7"><%= f.text_field :description, class: "col-sm-12 btn_ou" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div><br>
+
+    <div class="line"></div>
+
     <div class="row mr-0 ml-0">
       <div id="calendar"></div>
     </div>
