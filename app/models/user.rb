@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :missions, dependent: :destroy
   accepts_nested_attributes_for :missions
+
+  attachment :profile_image
+
   has_many :calendars #カレンダー内データを指す
 
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy # フォロー取得

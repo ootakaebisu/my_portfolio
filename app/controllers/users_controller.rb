@@ -116,11 +116,11 @@ class UsersController < ApplicationController
 
   protected
   def user_params
-    params.require(:user).permit(:name, :password, :my_id, :content)
+    params.require(:user).permit(:name, :password, :my_id, :content, :profile_image)
   end
 
   def update_user_params
     #update時は[_delete]と[id]が必要
-    params.require(:user).permit(:name, :password, :my_id, :content, missions_attributes: [:title, :deadline_on, :_destroy, :id])
+    params.require(:user).permit(:name, :password, :my_id, :content, :profile_image, missions_attributes: [:title, :deadline_on, :_destroy, :id])
   end
 end

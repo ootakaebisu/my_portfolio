@@ -9,6 +9,9 @@
       <h2 class="left">Public Page(編集)</h2><br>
       <div class="line "></div>
       <%= form_for @user do |f| %>
+
+        <%= f.attachment_field :profile_image %>
+
         <label>ユーザー名</label>
         <%= f.text_field :name %>
         <label>ユーザーID</label>
