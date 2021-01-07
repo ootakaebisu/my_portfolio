@@ -3,7 +3,11 @@
     <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
   </div>
 
-  <div class="col-sm-9">
+  <div class="col-sm-9 pr-5">
+    <h2 class="left">Time Attack</h2><br>
+    <div class="line "></div>
+  
+
     <!--status："doing"のMissionがある時-->
     <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
 

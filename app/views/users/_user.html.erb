@@ -1,16 +1,20 @@
 <div class="row ml-0 mr-0">
-  <div class="col-sm-9">
-    <%= user.name %>
-    ( @<%= user.my_id %> )<br>
+  <div class="col-sm-2">
+  </div>
+
+  <div class="col-sm-7">
+    <label><%= user.name %>( @<%= user.my_id %> )</label> <br>
 
     <% if user.missions.present? && user.missions.find_by(user_id: user.id, status: "doing") %>
       <% if mission.deadline_on.present? %>
-        <%= mission.deadline_on %>までに<%= mission.title %><br>
+        <label><%= mission.deadline_on %>までに<%= mission.title %></label><br>
         <label>ミッション進捗</label>
       <% else %>
-        <%= mission.title %><br>
+        <label><%= mission.title %></label><br>
         <label>ミッション進捗</label>
       <% end %>
+    <% else %>
+      <label>現在のミッションはありません</label>
     <% end %>
   </div>
 
@@ -23,7 +27,6 @@
   </div>
 </div>
 <%#= @user.profile_image_id %>
-
 
 <!--ビューの呼び出し部分-->
 <%#= link_to user.name, public_page_user_path(user) %>

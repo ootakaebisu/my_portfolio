@@ -81,12 +81,22 @@ h2 {
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
+  padding-left: 10px;
 }
 
 h3 {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.line {
+  width: 100%;
+  height: 6px;
+  margin: 20px 0;
+  background: #efefef;
+  box-shadow: inset 2px 2px 3px #e3e3e3,
+              inset -2px -2px 3px #fbfbfb;
 }
 
 // ボタン
@@ -111,7 +121,6 @@ h3 {
  box-shadow: inset 7px 7px 15px #d7d7d7,
             inset -7px -7px 15px #ffffff;
   padding: 20px 25px 20px 25px;
-  margin: 30px
 }
 
 .btn_ou {
@@ -131,17 +140,15 @@ h3 {
  box-shadow:  7px 7px 15px #d7d7d7,
              -7px -7px 15px #ffffff;
   padding: 20px 25px 20px 25px;
-  margin: 30pxx;
 }
 
 .btn_totsu {
  border-radius: 7px;
+ padding: 8px 25px;
+ border: 0 none;
  background: #efefef;
  box-shadow:  5px 5px 15px #d7d7d7,
              -5px -5px 15px #ffffff;
- padding: 8px 25px;
- border: 0 none;
- background: #525252;
  color: #FFFFFF;
 }
 
@@ -153,6 +160,15 @@ h3 {
   background-image: -moz-linear-gradient(36deg, #ca9aff 0%, #ffb09e 100%);
   background-image: -o-linear-gradient(36deg, #ca9aff 0%, #ffb09e 100%);
   background-image: linear-gradient(126deg, #ca9aff 0%, #ffb09e 100%);
+}
+
+.left {
+  text-align: left;
+  float: left;
+}
+
+.right {
+  text-align: right;
 }
 
 

@@ -3,7 +3,10 @@
     <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: @user } %>
   </div>
 
-  <div class="col-sm-9">
+  <div class="col-sm-9 pr-5">
+    <h2 class="left">Follow</h2><br>
+    <div class="line "></div>
+
     <% if @users.length > 0 %>
       <!--users#indexと同じ条件をフォローしている全ユーザに限定して適用-->
       <% @users.each do |user| %>

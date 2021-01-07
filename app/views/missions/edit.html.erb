@@ -1,35 +1,40 @@
-<h1>Missions#edit</h1>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
+  </div>
 
-<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
+  <div class="col-sm-9 pr-5">
+    <h2 class="left">Mission Edit</h2><br>
+    <div class="line "></div>
 
-<label>ミッション管理</label>
-<%= link_to "Back", new_record_path %>
+    <label>ミッション管理</label>
+    <%= link_to "Back", new_record_path %>
 
-<div>
-  <label>ミッションゴールの編集</label>
-  <%= form_with model: @mission, url: mission_path(id: @mission.id, order_sort: "0" ), method: :patch, local: true do |f| %>
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-    <label>タイトル</label><br>
-    <%= f.text_field :title %><br>
-    <label>記録する事柄</label><br>
-    <%= f.text_field :record_title %><br>
-    <label>期限</label><br>
-    <%= f.date_field :deadline_on %><br>
-    <%= f.submit "Save" %>
-  <% end %>
+    <div>
+      <label>ミッションゴールの編集</label>
+      <%= form_with model: @mission, url: mission_path(id: @mission.id, order_sort: "0" ), method: :patch, local: true do |f| %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <label>タイトル</label><br>
+        <%= f.text_field :title %><br>
+        <label>記録する事柄</label><br>
+        <%= f.text_field :record_title %><br>
+        <label>期限</label><br>
+        <%= f.date_field :deadline_on %><br>
+        <%= f.submit "Save" %>
+      <% end %>
+    </div>
+
+    <div>
+      <label>ミッションの完了</label>
+      <%= form_with model: @mission, url: mission_path(id: @mission.id, order_sort: 1 ), method: :patch, data: {confirm: "ミッションを完了しますか？"}, local: true do |f| %>
+        <%= f.hidden_field :status, :value => "after" %>
+        <%= f.submit "完了する" %>
+      <% end %>
+    </div>
+
+    <div>
+      <label>ミッションの削除</label>
+      <%= link_to "削除する", mission_path(@mission), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "" %>
+    </div>
+  </div>
 </div>
-
-<div>
-  <label>ミッションの完了</label>
-  <%= form_with model: @mission, url: mission_path(id: @mission.id, order_sort: 1 ), method: :patch, data: {confirm: "ミッションを完了しますか？"}, local: true do |f| %>
-    <%= f.hidden_field :status, :value => "after" %>
-    <%= f.submit "完了する" %>
-  <% end %>
-</div>
-
-<div>
-  <label>ミッションの削除</label>
-  <%= link_to "削除する", mission_path(@mission), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "" %>
-</div>
-
-

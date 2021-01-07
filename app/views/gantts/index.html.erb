@@ -2,12 +2,13 @@
   <div class="col-sm-3">
     <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user:current_user } %>
   </div>
-  
-  <div class="col-sm-9">
+
+  <div class="col-sm-9 pr-5">
+    <h2 class="left">Gantt</h2><br>
+    <div class="line "></div>
+
     <div class="row mr-0 ml-0">
-      <div class="col-sm-11">
-        <div class="gantt"></div>
-      </div>
+      <div class="gantt"></div>
     </div>
   </div>
 </div>

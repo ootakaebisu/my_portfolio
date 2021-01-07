@@ -4,28 +4,40 @@
   </div>
 
   <div class="col-sm-9 pr-5">
-    <h2>Public Page</h2>
-    <hr>
-    <% if @user.id == current_user.id %>
-    	<%= link_to 'Edit', edit_user_path(id: @user, order_sort: "0"), class: "btn" %>
-    <% else %>
-    	<% if current_user.following?(@user) %>
-        <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "" %>
+    <h2 class="left">Public Page</h2>
+
+    <div class="right">
+      <% if @user.id == current_user.id %>
+      	<%= link_to 'Edit', edit_user_path(id: @user, order_sort: "0"), class: "btn" %>
       <% else %>
-        <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class: "" %>
+      	<% if current_user.following?(@user) %>
+          <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST, class: "btn" %>
+        <% else %>
+
+          <%= link_to 'フォローする', follow_path(@user.id), method: :POST, class: "btn" %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
 
-    <%= render "user", { user: @user, mission: @mission, records: @records } %>
+    <div class="line mt-2"></div>
 
-    <% if @user.content.present? %>
-      <label>ユーザープロフィール</label><br>
-      <%= @user.content %><br>
-    <% end %>
+    <%= render "user", { user: @user, mission: @mission, records: @records } %><br>
+
+    <div class="line mt-2"></div>
+
+    <div class="row ml-0 mr-0">
+      <% if @user.content.present? %>
+        <div class="col-sm-2">プロフィール</div>
+        <div class="col-sm-10"><%= @user.content %></div>
+      <% end %>
+    <div></div>
 
     <% unless @user.id == current_user.id %>
-    	<%= link_to 'ユーザー一覧へ', users_path, class: "" %>
+    <div class="text-center">
+      <%= link_to 'ユーザー一覧へ', users_path, class: "btn" %>
+    </div>
     <% end %>
+
   </div>
 </div>
 

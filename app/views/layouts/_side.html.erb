@@ -5,7 +5,7 @@
       <div class="col-sm-12">
         <% if user.missions.present? && user.missions.find_by(status: "doing").present? %>
           <div class="row mr-0 ml-0">
-            <div class="totsu col-sm-12">
+            <div class="ou col-sm-12">
               <% mission = user.missions.where(status: "doing").last %>
               <label><%= mission.title %></label><br>
               <label>(ランクのバロメータ)</label><br>
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <hr>
+    <div class="line"></div>
 
     <!--link部分-->
     <div class="row mr-0 ml-0 d-flex flex-column pt-2">
