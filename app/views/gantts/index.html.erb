@@ -13,4 +13,7 @@
   </div>
 </div>
 
-<%= render 'gantt', locals: { testtest: "テストさん"} %>
+<!--<%= render 'gantt', locals: { name: @name, desc: @desc, from: @from, to: @to, label: @label, customClass: @customClass} %>-->
+
+
+<%= render 'gantt', locals: { values: @values } %>

@@ -38,4 +38,19 @@ Calendar.create!(
   end_date: Time.now
 )
 
+Gantt.create!(
+  user_id: 1,
+  name: 1,
+  desc: 'ガント',
+  from: Time.now,
+  to: Time.now,
+  label: 'ラベルデータ',
+  customClass: 'クラス'
+)
+
+
+
+
+
+
 

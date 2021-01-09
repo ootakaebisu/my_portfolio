@@ -1,7 +1,15 @@
-<h1>DailyClears#show</h1>
 
-<label>result</label><br>
-<label><%= @mission.title %></label><br>
-<label>Today's Mission Clear!</label><br>
-<label><%= "Total " + @daily_records.to_s %></label><br>
-<%= link_to "Work Spaceへ戻る", mission_path(@mission.id) %>
+
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <div class="text-center totsu color-1 mt-5">
+      <p class="color-3 mb-1 mt-3">result</p>
+      <h3 class="color-3"><%= @mission.title %></h3>
+      <h2 class="color-3">Today's Mission Clear!</h2>
+      <p class="color-3 mb-1 mt-3 mb-3"><%= "Total " + @daily_records.to_s %></p>
+      <%= link_to "Work Spaceへ戻る", mission_path(@mission.id), class: "btn color-2 mb-3"  %>
+
+    </div>
+  </div>
+</div>

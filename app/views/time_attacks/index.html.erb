@@ -4,44 +4,65 @@
   </div>
 
   <div class="col-sm-9 pr-5">
-    <h2 class="left">Time Attack Index</h2><br>
-    <div class="line "></div>
-    
-    <%= link_to "Record 一覧へ(現在のミッション)", records_path %>
+    <div class="row ml-0 mr-0">
+      <div class="col-sm-12">
+        <h2 class="left">Time Attack Index</h2>
+        <div class="right"><%= link_to "現在のRecord Indexへ", records_path, class: "btn" %></div>
+      </div>
+    </div>
 
-    <% if @mission.present? && @mission.time_attacks.present? %>
-      <% @time_attacks.each do |time_attack| %>
-        <table>
-          <tbody>
-            <tr>
-              <td><%= l time_attack.created_at, format: :date %></td>
-              <td><%= time_attack.title %></td>
-              <td><%= time_attack.diff %></td>
-            </tr>
-          </tbody>
-        </table>
-      <% end %>
-    <% else %>
-      <div>記録はありません</div>
-    <% end %>
+    <div class="row ml-0 mr-0">
+      <div class="col-sm-8 pl-3">
+        <div class="line"></div>
+      </div>
+      <div class="col-sm-4">
+        <div class="line"></div>
+      </div>
+    </div>
 
-    <!--終了ミッション一覧-->
-    <% if @finish_missions.present? %>
-      <% @finish_missions.each_with_index do |fm, n| %>
-        <%= link_to time_attacks_path(order_sort: "#{n + 1}") do %>
-          <table>
-            <tbody>
-              <tr>
-                <td><%= l fm.created_at, format: :year_date %> - <%= l fm.updated_at, format: :year_date %></td>
-                <td><%= fm.title %></td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="row ml-0 mr-0">
+      <div class="col-sm-8">
+        <% if @mission.present? && @mission.time_attacks.present? %>
+          <% @time_attacks.each do |time_attack| %>
+            <table>
+              <tbody>
+                <tr>
+                  <td><%= l time_attack.created_at, format: :date %></td>
+                  <td><%= time_attack.title %></td>
+                  <td><%= time_attack.diff %></td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        <% else %>
+          <div>記録はありません</div>
         <% end %>
-      <% end %>
-    <% end %>
+      </div>
+
+      <div class="col-sm-4">
+        <!--終了ミッション一覧-->
+        <% if @finish_missions.present? %>
+          <% @finish_missions.each_with_index do |fm, n| %>
+          <div class="mb-3">
+              <%= link_to time_attacks_path(order_sort: "#{n + 1}") do %>
+                <table class="color-4">
+                  <tbody class="color-4">
+                    <tr class="color-4">
+                      <td class="color-4"><%= l fm.created_at, format: :year_date %> - <%= l fm.updated_at, format: :year_date %></td>
+                    </tr>
+                    <tr class="color-4">
+                      <td class="color-4"><b class="color-4"><%= fm.title %></b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
   </div>
-</div>
 
 
 

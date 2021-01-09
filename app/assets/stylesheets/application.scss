@@ -40,12 +40,6 @@ header {
   margin-bottom: 10px;
 }
 
-hr {
-   border-width: 1px 0px 0px 0px; /* 太さ */
-   border-style: solid; /* 線種 */
-   border-color: #424242;   /* 線色 */
-  // height: 1px;         /* 高さ(※古いIE用) */
-}
 
 // footerの下部固定css
 .footerFixed{
@@ -80,7 +74,7 @@ a:hover {
 h2 {
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   padding-left: 10px;
 }
 
@@ -90,6 +84,7 @@ h3 {
   margin-bottom: 10px;
 }
 
+// 線
 .line {
   width: 100%;
   height: 6px;
@@ -99,10 +94,39 @@ h3 {
               inset -2px -2px 3px #fbfbfb;
 }
 
+.line_vert {
+  width: 6px;
+  height: 100%;
+  margin: 0 auto;
+  background: #efefef;
+  box-shadow: inset 2px 2px 3px #e3e3e3,
+              inset -2px -2px 3px #fbfbfb;
+}
+
+.border {
+  border: solid 2px #ffffff;
+  border-color: #ffffff !important;
+  margin: 5px;
+}
+
+// 取り消し線
+.finish {
+  background-image: linear-gradient(#e85d76, #e85d76);
+  background-position: 0 60%;
+  background-size: 50% 2px;
+  background-repeat: repeat-x;
+  color: #888;
+  text-decoration: none;
+}
+
+.finish > span {
+  color: #424242;
+}
+
 // ボタン
 .btn {
   border-radius: 7px;
-  padding: 8px 25px;
+  padding: 8px 50px;
   border: 0 none;
   background: #525252;
   color: #FFFFFF !important;;
@@ -120,7 +144,7 @@ h3 {
  background: #efefef;
  box-shadow: inset 7px 7px 15px #d7d7d7,
             inset -7px -7px 15px #ffffff;
-  padding: 20px 25px 20px 25px;
+ padding: 20px 25px 20px 25px;
 }
 
 .btn_ou {
@@ -152,7 +176,7 @@ h3 {
  color: #FFFFFF;
 }
 
-// CSSグラデーション
+// 色
 // daily_clearボタン使用色
 .color-1 {
   background-color: #ca9aff;
@@ -162,6 +186,34 @@ h3 {
   background-image: linear-gradient(126deg, #ca9aff 0%, #ffb09e 100%);
 }
 
+// 半透明ボタンなど(背景色半透明/文字白)
+.color-2 {
+  background-color: rgba( 255, 255, 255, 0.3 );
+  font-weight: bold;
+  color: #ffffff;
+}
+
+// クリアページなど(背景色透明/文字白)
+.color-3 {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+// 背景の透過
+.color-4 {
+  background-color: transparent ;
+}
+
+.color-5 {
+  background-color: #e5617e;
+}
+
+.color-6 {
+  background-color: #77c6e5;
+}
+
+
+// 配置
 .left {
   text-align: left;
   float: left;
@@ -171,4 +223,7 @@ h3 {
   text-align: right;
 }
 
+.center {
+  margin: 0 auto;
+}
 

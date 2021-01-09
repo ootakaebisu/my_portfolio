@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_100049) do
+ActiveRecord::Schema.define(version: 2021_01_07_115353) do
 
   create_table "calendars", force: :cascade do |t|
     t.integer "user_id"
@@ -28,6 +28,19 @@ ActiveRecord::Schema.define(version: 2021_01_06_100049) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "gantts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "desc"
+    t.datetime "from"
+    t.datetime "to"
+    t.string "label"
+    t.string "customClass"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_gantts_on_user_id"
   end
 
   create_table "missions", force: :cascade do |t|

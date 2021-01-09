@@ -1,27 +1,32 @@
-<h1>Missions#complete</h1>
 
-<label>result</label><br>
-<label><%= @mission.title %></label><br>
-<label>Mission Complete!!!!!!!!</label><br>
-<label><%= "Total " + @records.to_s %></label><br>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <div class="text-center totsu color-1 mt-5">
+      <p class="color-3 mb-1 mt-3">Mission</p>
+      <h3 class="color-3"><%= @mission.title %></h3>
+      <h2 class="color-3">Mission Complete!!!!!!!!</h2>
+      <p class="color-3"><%= "Total Record " + @records.to_s %></p>
+      <div class="row ml-0 mr-0 color-3 justify-content-center mb-3">
+        <div class="col-sm-3 color-3 border">Record</div>
+        <div class="col-sm-3 color-3 border">Continuation</div>
+        <div class="col-sm-3 color-3 border">Recovery</div>
+      </div>
+      <p class="color-3">
+        <% if @mission.deadline_on.present? && @diff < 0 %>
+          最終締め切り
+          <%= @mission.deadline_on %>
+          より
+          <%= @diff %>日早く達成!(/1を取り除く必要あり)
+        <% end %>
+      </p>
+      <p class="color-3">
+        <% if @mission.small_goals.present? && @mission.small_goals.where(status: "after").present? %>
+          <%= @mission.small_goals.where(status: "after").count %>個のスモールゴールを達成!
+        <% end %>
+      </p>
+      <%= link_to "Homeへ", new_record_path, class: "btn color-2 mb-3" %>
 
-<label>Record</label><br>
-<label>Continuation</label><br>
-<label>Recovery</label><br>
+    </div>
+  </div>
+</div>
 
-<label>
-  <% if @diff < 0 %>
-    最終締め切り
-    <%= @mission.deadline_on %>
-    より
-    <%= @diff %>日早く達成!(/1を取り除く必要あり)
-  <% end %>
-</label><br>
-
-<label>
-  <% if @mission.small_goals.present? && @mission.small_goals.where(status: "after").present? %>
-    <%= @mission.small_goals.where(status: "after").count %>個のスモールゴールを達成!
-  <% end %>
-</label><br>
-
-<%= link_to "Homeへ", new_record_path %>
