@@ -118,11 +118,11 @@
 
                 <!--スモールゴールの削除(status:before/doing時)orステータスを着手前に戻す(status:after時)-->
                 <% if small_goal.status == "before" || small_goal.status == "doing" %>
-                  <%= link_to "(×)", small_goal_path(small_goal.id), method: :delete %>
+                  <%= link_to "×", small_goal_path(small_goal.id), method: :delete, class: "btn" %>
                 <% elsif small_goal.status == "after" %>
                   <%= form_with model: small_goal, local: true do |f| %>
                     <%= f.hidden_field :status, :value => "before" %>
-                    <%= f.submit "(←)" %>
+                    <%= f.submit "←", class: "btn" %>
                   <% end %>
                 <% end %>
               <% end %>

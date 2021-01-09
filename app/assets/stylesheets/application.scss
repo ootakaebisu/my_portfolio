@@ -129,11 +129,37 @@ h3 {
   padding: 8px 50px;
   border: 0 none;
   background: #525252;
-  color: #FFFFFF !important;;
+  color: #FFFFFF !important;
+}
+
+.btn_2 {
+  display: inline-block;
+  padding: 8px 50px;
+  text-decoration: none;
+  color: #424242;
+  border: solid 2px #424242;
+  border-radius: 7px;
+  font-weight: bold;
+  transition: .4s;
+}
+
+.btn_2:hover {
+  background: #424242;
+  color: white;
+}
+
+// ボタンmini
+.btn_mini {
+  padding: 8px 8px;
+  width: 100%;
+  border: 0 none;
+  background: #efefef;
+  color: #424242 !important;
 }
 
 // ボタンの挙動
-.btn_totsu:hover, .btn:hover {
+
+.btn_totsu:hover, .btn:hover, .btn_mini:hover {
   opacity: 0.6 ;
   cursor : pointer;
 }
@@ -201,7 +227,7 @@ h3 {
 
 // 背景の透過
 .color-4 {
-  background-color: transparent ;
+  background-color: transparent !important;
 }
 
 .color-5 {

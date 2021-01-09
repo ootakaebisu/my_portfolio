@@ -8,8 +8,6 @@
             <div class="ou col-sm-12">
               <% mission = user.missions.where(status: "doing").last %>
               <label><%= mission.title %></label><br>
-              <label>(ランクのバロメータ)</label><br>
-              <label>RANK</label><br>
               <label>Total : <%= mission.time_attacks.count + mission.records.count %></label><br>
               <label>Continuation</label><br>
               <label>Recovery</label>

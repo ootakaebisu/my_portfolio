@@ -13,7 +13,7 @@
 
       <h3 align="center">Missionのゴール設定</h3>
 
-      <%= form_with model: @mission, url: missions_path, local: true do |f| %>
+      <%= form_with model: @mission, url: mission_path(@mission), local: true do |f| %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
         <table class="row mr-0 ml-0">
           <tbody class="col-sm-12">
