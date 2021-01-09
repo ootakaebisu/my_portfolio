@@ -6,7 +6,7 @@ class TimeAttacksController < ApplicationController
     if @time_attack.save
       redirect_back(fallback_location: root_path)
     else
-      render :new
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -69,7 +69,7 @@ class TimeAttacksController < ApplicationController
     if @mission.present? && @mission.records.present?
       @records = @mission.records
     end
-    
+
     if @mission.present? && @mission.time_attacks.present?
       @time_attacks = @mission.time_attacks
     end

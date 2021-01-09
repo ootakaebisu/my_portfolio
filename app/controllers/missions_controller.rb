@@ -19,7 +19,7 @@ class MissionsController < ApplicationController
   def show
     @time_attack = TimeAttack.new
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
-    @time_attacks = TimeAttack.where(mission_id: @mission.id)
+    @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
     if @mission.present? && @mission.time_attacks.present?
       @time_attack_created = TimeAttack.find(params[:id])
     end
