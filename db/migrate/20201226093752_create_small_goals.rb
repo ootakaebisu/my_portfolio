@@ -5,6 +5,7 @@ class CreateSmallGoals < ActiveRecord::Migration[5.2]
       t.string :title
       t.date :deadline_on
       t.integer :status, default: 0
+      t.integer :row_order
 
       t.timestamps
     end

@@ -30,7 +30,12 @@ Rails.application.routes.draw do
   resources :daily_clears, only:[:show, :create, :update]
   resources :time_attacks, only:[:create, :update, :index]
   resources :records, only:[:new, :create, :index, :destroy]
-  resources :small_goals, only:[:create, :update, :destroy]
+  resources :small_goals, only:[:create, :update, :destroy] do
+    # put :sort
+    collection do
+      put 'sort/:small_goal_id', action: 'sort', as: 'sort'
+    end
+  end
   resources :calendars, only:[:index, :create, :update]
   resources :gantts, only:[:index, :create, :edit, :update]
 end

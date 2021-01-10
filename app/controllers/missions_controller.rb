@@ -29,6 +29,8 @@ class MissionsController < ApplicationController
       @daily_records = @mission.time_attacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count + @mission.records.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count
     end
     @small_goal = SmallGoal.new
+    # 追加
+    @small_goals = @mission.small_goals.rank(:row_order)
   end
 
   def edit

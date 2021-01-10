@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_115353) do
     t.string "title"
     t.date "deadline_on"
     t.integer "status", default: 0
+    t.integer "row_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
