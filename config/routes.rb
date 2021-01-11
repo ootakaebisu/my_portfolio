@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   get 'daily_clears/show'
   root 'homes#top'
-  devise_for :users
+  devise_for :users,
+  controllers: {
+    omniauth_callbacks: 'omniauth_callbacks'
+  }
+
   resources :users, only:[:show, :index, :edit, :update] do
     collection do
       get :result

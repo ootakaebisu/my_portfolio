@@ -8,6 +8,10 @@
 
             <h2 class="text-center">Log in</h2>
 
+            <%= link_to user_google_oauth2_omniauth_authorize_path do %>
+              aaaaa
+            <% end %>
+
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
               <div class="row field pl-4 pr-4 mb-2">
                 <%= f.label :ユーザーID %><br />
