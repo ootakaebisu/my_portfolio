@@ -1,4 +1,6 @@
 class RecordsController < ApplicationController
+  before_action :authenticate_user!
+  
   def new
     if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
       @mission = Mission.find_by(user_id: current_user.id, status: "doing")
@@ -14,6 +16,9 @@ class RecordsController < ApplicationController
     end
     @record = Record.new
     @small_goal = SmallGoal.new
+    if @mission.present?
+      @small_goals = @mission.small_goals.rank(:row_order)
+    end
   end
 
   def create

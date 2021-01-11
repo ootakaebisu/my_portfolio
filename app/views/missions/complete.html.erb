@@ -14,9 +14,10 @@
       <p class="color-3">
         <% if @mission.deadline_on.present? && @diff < 0 %>
           最終締め切り
-          <%= @mission.deadline_on %>
+          <%=  @mission.deadline_on %>
           より
-          <%= @diff %>日早く達成!(/1を取り除く必要あり)
+          <!--Date 同士の差は Rational になる(/1がついていた件)-->
+          <%= @diff.to_i %>日早く達成!
         <% end %>
       </p>
       <p class="color-3">

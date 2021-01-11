@@ -77,5 +77,39 @@
       <div class="col-sm-1"></div>
     </div>
 
+    <div class="line "></div>
+    <div class="row mr-0 ml-0">
+      <div id="chart"></div>
+    </div>
   </div>
 </div>
+
+
+<script src="d3.min.js"></script><!-- D3.js を読み込む -->
+<script src="c3.min.js"></script><!-- C3.js を読み込む -->
+<link href="c3.css" rel="stylesheet" type="text/css"><br>
+
+<script>
+var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+        columns: [
+            ['data1', 30, 200, 100, 400, 150, 250],
+            ['data2', 130, 100, 140, 200, 150, 50]
+        ],
+        type: 'bar'
+    }
+});
+</script>
+
+<!--var demoSource = [];-->
+<!--  values.forEach((value) => {-->
+
+<!--      var demoSoureItem = {-->
+<!--          name: value.name,-->
+<!--          desc: value.desc,-->
+<!--          values: []v -->
+<!--      };-->
+<!--      demoSource.push(demoSoureItem);-->
+<!--  });-->
+

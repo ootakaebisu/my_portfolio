@@ -1,5 +1,5 @@
 class TimeAttacksController < ApplicationController
-
+  before_action :authenticate_user!
 
   def create
     @time_attack = TimeAttack.new(time_attack_params)
@@ -7,6 +7,7 @@ class TimeAttacksController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       redirect_back(fallback_location: root_path)
+      # render template: "missions/show"
     end
   end
 

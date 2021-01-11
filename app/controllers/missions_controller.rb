@@ -19,7 +19,10 @@ class MissionsController < ApplicationController
   def show
     @time_attack = TimeAttack.new
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
-    @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    if @mission.present?
+      @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+      @small_goals = @mission.small_goals.rank(:row_order)
+    end
     if @mission.present? && @mission.time_attacks.present?
       @time_attack_created = TimeAttack.find(params[:id])
     end
@@ -29,8 +32,6 @@ class MissionsController < ApplicationController
       @daily_records = @mission.time_attacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count + @mission.records.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count
     end
     @small_goal = SmallGoal.new
-    # 追加
-    @small_goals = @mission.small_goals.rank(:row_order)
   end
 
   def edit

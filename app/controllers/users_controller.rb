@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, except: [:result]
 
   def show
     # ここから/部分テンプレート呼び出し

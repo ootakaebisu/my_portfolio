@@ -54,7 +54,10 @@
       <% end %>
         <%= link_to "Calendar", calendars_path, class: "pt-2 pb-2 pl-4" %>
         <%= link_to "Log", records_path, class: "pt-2 pb-2 pl-4" %>
-        <%= link_to "Gantt", gantts_path, class: "pt-2 pb-2 pl-4" %>
+        <%#= link_to "Gantt", gantts_path, class: "pt-2 pb-2 pl-4" %>
+      <% if current_user.missions.present? %>
+        <%= link_to "Mission", edit_mission_path(mission.id), class: "pt-2 pb-2 pl-4" %>
+      <% end %>
     </div>
   </div>
 </div>
