@@ -1,6 +1,6 @@
 class GanttsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     # ここから/部分テンプレート呼び出し
     if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?

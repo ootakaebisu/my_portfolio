@@ -1,6 +1,6 @@
 class CalendarsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @calendar = Calendar.new
     @calendars = Calendar.all
@@ -22,7 +22,17 @@ class CalendarsController < ApplicationController
     end
   end
 
+  def show
+    @calendar = Calendar.find(params[:id])
+  end
+
   def update
+    @calendar = Calendar.find(params[:id])
+    if @calendar.update(calendar_params)
+      redirect_to calendar_path(@calendar)
+    else
+      render :show
+    end
   end
 
   protected

@@ -163,6 +163,27 @@ h3 {
   cursor : pointer;
 }
 
+// FontAwesome用btnCSS(隣接セレクタを利用)
+.btn_3 {
+  display: inline-block;
+  padding: 8px 50px;
+  text-decoration: none;
+  color: #424242;
+  border: solid 2px #424242;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.btn_3:hover  {
+  background: #424242;
+  color: #ffffff ;
+}
+
+.btn_3:hover .fa-redo-alt {
+  background: #424242;
+  color: #ffffff ;
+}
+
 // ニューモフィズム(全4種類/凹or凸 × 通常div or btn)
 .ou {
  border-radius: 7px;
@@ -291,4 +312,5 @@ h3 {
   animation-direction: alternate;
   animation-duration: 1.5s;
 }
+
 

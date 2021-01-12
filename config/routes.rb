@@ -40,6 +40,6 @@ Rails.application.routes.draw do
       put 'sort/:small_goal_id', action: 'sort', as: 'sort'
     end
   end
-  resources :calendars, only:[:index, :create, :update]
+  resources :calendars, only:[:index, :show, :create, :update]
   resources :gantts, only:[:index, :create, :edit, :update]
 end

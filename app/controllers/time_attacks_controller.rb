@@ -52,9 +52,10 @@ class TimeAttacksController < ApplicationController
       i = @finish_missions.count #範囲オブジェクトの上限値として使うために終了済みミッションの個数をiと定義
       @n = params[:order_sort].to_i
     end
+
     case @n
     when 1..i #order_sortが1~iの時
-      @mission = Mission.find(@n)
+      @mission = Mission.where(user_id: current_user.id, status: "after").limit(@n).last
       # @record_paginate = @record_count.page(params[:page]).per(8) #whereで取り出したデータにページネーションを適用
 
     #以下最新ミッションのレコード表示の記述箇所(order_sortがnil)
