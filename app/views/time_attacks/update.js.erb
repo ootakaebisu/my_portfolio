@@ -1,4 +1,4 @@
-$("#comments_area").html("<%= j(render 'time_attack',{ time_attack: @time_attack, mission: @mission, time_attacks: @time_attacks }) %>");
+$("#list").html("<%= j(render 'list',{ time_attack: @time_attack, time_attacks: @time_attacks }) %>");
 
 $("#time_attack_title").val('')
 $("#time_attack_deadline_at").val('')

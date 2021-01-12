@@ -40,8 +40,12 @@
       <div class="col-sm-10 offset-sm-1 pl-0 pr-0">
         <div class="line mt-0"></div>
 
-        <div id="comments_area">
-          <%= render partial: "time_attacks/time_attack", locals: { time_attack: @time_attack, mission: @mission, time_attacks: @time_attacks } %>
+        <div id="form">
+          <%= render partial: "time_attacks/form", locals: { time_attack: @time_attack, mission: @mission } %>
+        </div>
+
+        <div id="list">
+          <%= render partial: "time_attacks/list", locals: { time_attack: @time_attack, time_attacks: @time_attacks } %>
         </div>
          <!--status："doing"のMissionがない時-->
       <% else %>

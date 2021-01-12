@@ -2,11 +2,12 @@ class TimeAttacksController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    @time_attack_new = TimeAttack.new
     @time_attack = TimeAttack.new(time_attack_params)
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
     @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
     if @time_attack.save
-      # logger.debug 'グーグル！！！！！！！！！！'
+      logger.debug 'グーグル！！！！！！！！！！'
       # redirect_back(fallback_location: root_path)
     else
       redirect_back(fallback_location: root_path)
@@ -23,7 +24,7 @@ class TimeAttacksController < ApplicationController
     if  @time_attack.status == "doing"
       # redirect_back(fallback_location: root_path)
       logger.debug 'グーグルdoing！！！！！！！！！！'
-      
+
     # 実行中=>終了はfinish_atカラムとdiff_atカラムを作ってから元のページに戻る
     elsif @time_attack.status == "after"
       require "date"
