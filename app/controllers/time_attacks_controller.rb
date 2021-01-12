@@ -6,7 +6,7 @@ class TimeAttacksController < ApplicationController
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
     @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
     if @time_attack.save
-      logger.debug 'グーグル！！！！！！！！！！'
+      # logger.debug 'グーグル！！！！！！！！！！'
       # redirect_back(fallback_location: root_path)
     else
       redirect_back(fallback_location: root_path)
@@ -15,19 +15,22 @@ class TimeAttacksController < ApplicationController
   end
 
   def update
-    @time_attack_created = TimeAttack.find(params[:id])
-    @time_attack_created.update(time_attack_params)
+    @time_attack = TimeAttack.find(params[:id])
+    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+    @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
+    @time_attack.update(time_attack_params)
     # 実行前=>実行中はstatusのvalueの変更のみで元のページに戻る
-    if  @time_attack_created.status == "doing"
-      redirect_back(fallback_location: root_path)
-
+    if  @time_attack.status == "doing"
+      # redirect_back(fallback_location: root_path)
+      logger.debug 'グーグルdoing！！！！！！！！！！'
+      
     # 実行中=>終了はfinish_atカラムとdiff_atカラムを作ってから元のページに戻る
-    elsif @time_attack_created.status == "after"
+    elsif @time_attack.status == "after"
       require "date"
-      @time_attack_created.finish_at = DateTime.now
+      @time_attack.finish_at = DateTime.now
 
       # Finishを押した時間から自分が定めた設定時間を引いた秒数を整数で取得
-      sec = @time_attack_created.finish_at.to_i - @time_attack_created.deadline_at.to_i
+      sec = @time_attack.finish_at.to_i - @time_attack.deadline_at.to_i
       # secの絶対値を使って差分を出す
       sec_new = sec.abs
       day, sec_r = sec_new.divmod(86400)
@@ -38,13 +41,14 @@ class TimeAttacksController < ApplicationController
       end
       # secの正と負を文字列に追加
       if sec >= 0
-        @time_attack_created.diff = "＋" + diff
+        @time_attack.diff = "＋" + diff
       else
-        @time_attack_created.diff = "－" + diff
+        @time_attack.diff = "－" + diff
       end
 
-      @time_attack_created.update(time_attack_params)
-      redirect_back(fallback_location: root_path)
+      @time_attack.update(time_attack_params)
+      logger.debug 'グーグルafter！！！！！！！！！！'
+      # redirect_back(fallback_location: root_path)
     end
   end
 
