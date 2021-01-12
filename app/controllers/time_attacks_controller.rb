@@ -3,8 +3,11 @@ class TimeAttacksController < ApplicationController
 
   def create
     @time_attack = TimeAttack.new(time_attack_params)
+    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+    @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
     if @time_attack.save
-      redirect_back(fallback_location: root_path)
+      logger.debug 'グーグル！！！！！！！！！！'
+      # redirect_back(fallback_location: root_path)
     else
       redirect_back(fallback_location: root_path)
       # render template: "missions/show"

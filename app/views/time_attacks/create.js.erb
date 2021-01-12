@@ -1,0 +1,5 @@
+
+$("#comments_area").prepend("<%= j(render 'time_attack',{ time_attack: @time_attack, mission: @mission, time_attacks: @time_attacks }) %>");
+
+$("#time_attack_title").val('')
+$("#time_attack_deadline_at").val('')

@@ -26,13 +26,13 @@ Rails.application.routes.draw do
     member do
       get :complete
     end
+    resources :time_attacks, only:[:create, :update, :index]
   end
 
   post 'create/:id' => 'relationships#create', as: 'follow' # フォローする
   post 'destroy/:id' => 'relationships#destroy', as: 'unfollow' # フォロー外す
 
   resources :daily_clears, only:[:show, :create, :update]
-  resources :time_attacks, only:[:create, :update, :index]
   resources :records, only:[:new, :create, :index, :destroy]
   resources :small_goals, only:[:create, :update, :destroy] do
     # put :sort

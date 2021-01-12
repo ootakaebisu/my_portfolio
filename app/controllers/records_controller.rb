@@ -12,7 +12,7 @@ class RecordsController < ApplicationController
       @daily_records = @mission.time_attacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count + @mission.records.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count
     end
     if @mission.present? && @mission.records.present?
-      @records = @mission.records.all
+      @records = Record.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
     end
     @record = Record.new
     @small_goal = SmallGoal.new

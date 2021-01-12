@@ -1,0 +1,67 @@
+<!--作成/TimeAttackデータ-->
+          <%= form_with(model: time_attack, url:mission_time_attacks_path(mission), remote: true, id: "ta_data") do |f| %>
+          <%= f.hidden_field :mission_id, :value => mission.id %>
+            <table class="row mr-0 ml-0">
+              <tbody class="col-sm-12 pl-0 pr-0">
+                <tr class="row mr-0 ml-0">
+                  <td class="col-sm-6 pl-1 pr-1"><%= f.text_field :title, class: "col-sm-12 btn_ou" %></td>
+                  <td class="col-sm-4 pl-1 pr-1"><%= f.datetime_field :deadline_at, class: "col-sm-12 btn_ou" %></td>
+                  <td class="col-sm-2 pl-1 pr-1"><%= f.submit "Set", class: "col-sm-12 btn" %></td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+
+          <!--ステータスによる表示内容の分岐-->
+          <!--表示/TimeAttackデータ-->
+          <% if time_attacks.present? %>
+            <% time_attacks.each do |time_attack| %>
+              <!--実行前=>実行中-->
+              <% if time_attack.status == "before" %>
+                <table class="row mr-0 ml-0">
+                  <tbody class="col-sm-12 pl-0 pr-0">
+                    <tr class="row mr-0 ml-0">
+                      <td class="col-sm-6 pl-2 pr-1 pt-3 pb-2"><%= time_attack.title %></td>
+                      <td class="col-sm-4 pl-2 pr-1 pt-3 pb-2"><%= l time_attack.deadline_at, format: :short%></td>
+                      <td class="col-sm-2 pl-1 pr-1 pt-1 pb-2">
+                        <%= form_with model: time_attack, url: mission_time_attack_path(mission_id: time_attack.mission.id, id: time_attack.id), local: true do |f| %>
+                          <%= f.hidden_field :status, :value => "doing" %>
+                          <%= f.submit "Start", class: "col-sm-12 btn color-5" %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              <!--実行中=>終了-->
+              <% elsif time_attack.status == "doing" %>
+                <table class="row mr-0 ml-0">
+                  <tbody class="col-sm-12 pl-0 pr-0">
+                    <tr class="row mr-0 ml-0">
+                      <td class="col-sm-6 pl-2 pr-1 pt-3 pb-2"><%= time_attack.title %></td>
+                      <td class="col-sm-4 pl-2 pr-1 pt-3 pb-2"><%= l time_attack.deadline_at, format: :short%></td>
+                      <td class="col-sm-2 pl-1 pr-1 pt-1 pb-2">
+                        <%= form_with model: time_attack, url: mission_time_attack_path(mission_id: time_attack.mission.id, id: time_attack.id), local: true do |f| %>
+                          <%= f.hidden_field :status, :value => "after" %>
+                          <%= f.submit "Finish", class: "col-sm-12 btn color-6" %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              <!--終了後-->
+              <% else %>
+                <table class="row mr-0 ml-0">
+                  <tbody class="col-sm-12 pl-0 pr-0">
+                    <tr class="row mr-0 ml-0">
+                      <td class="col-sm-6 pl-2 pr-1 pt-3 pb-2 finish"><%= time_attack.title %></td>
+                      <td class="col-sm-4 pl-2 pr-1 pt-3 pb-2"></td>
+                      <td class="col-sm-2 pl-1 pr-1 pt-3 pb-2"><%= time_attack.diff %></td>
+                    </tr>
+                  </tbody>
+                </table>
+              <% end %>
+
+            <% end %>
+          <% end %>
