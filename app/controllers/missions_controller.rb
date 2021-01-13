@@ -20,7 +20,8 @@ class MissionsController < ApplicationController
     @time_attack = TimeAttack.new
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
     if @mission.present?
-      @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+      # 降順.order(id: "DESC")
+      @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
       @small_goals = @mission.small_goals.rank(:row_order)
     end
     @daily_clear = DailyClear.new

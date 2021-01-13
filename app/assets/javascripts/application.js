@@ -25,8 +25,6 @@
 
 //= require_tree .
 
-
-
 // モーダル開閉
 $(document).on('turbolinks:load', function() {
     $('.js-modal-open').on('click',function(){
@@ -38,6 +36,8 @@ $(document).on('turbolinks:load', function() {
         return false;
     });
 });
+
+
 
 
 // ドラッグ&ドロップ

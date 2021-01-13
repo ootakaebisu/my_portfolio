@@ -44,7 +44,7 @@
         <% if @finish_missions.present? %>
           <% @finish_missions.each_with_index do |fm, n| %>
           <div class="mb-3">
-              <%= link_to time_attacks_path(order_sort: "#{n + 1}") do %>
+              <%= link_to mission_time_attacks_path(order_sort: "#{n + 1}", mission_id: fm.id ) do %>
                 <table class="color-4">
                   <tbody class="color-4">
                     <tr class="color-4">

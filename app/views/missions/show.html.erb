@@ -40,74 +40,12 @@
       <div class="col-sm-10 offset-sm-1 pl-0 pr-0">
         <div class="line mt-0"></div>
 
-        <div>
-           <!--作成/TimeAttackデータ-->
-          <%= form_with model: @time_attack, local: true do |f| %>
-          <%= f.hidden_field :mission_id, :value => @mission.id %>
-            <table class="row mr-0 ml-0">
-              <tbody class="col-sm-12 pl-0 pr-0">
-                <tr class="row mr-0 ml-0">
-                  <td class="col-sm-6 pl-1 pr-1"><%= f.text_field :title, class: "col-sm-12 btn_ou" %></td>
-                  <td class="col-sm-4 pl-1 pr-1"><%= f.datetime_field :deadline_at, class: "col-sm-12 btn_ou" %></td>
-                  <td class="col-sm-2 pl-1 pr-1"><%= f.submit "Set", class: "col-sm-12 btn" %></td>
-                </tr>
-              </tbody>
-            </table>
-          <% end %>
+        <div id="form">
+          <%= render partial: "time_attacks/form", locals: { time_attack: @time_attack, mission: @mission } %>
+        </div>
 
-          <!--ステータスによる表示内容の分岐-->
-          <!--表示/TimeAttackデータ-->
-          <% if @time_attacks.present? %>
-            <% @time_attacks.each do |time_attack| %>
-              <!--実行前=>実行中-->
-              <% if time_attack.status == "before" %>
-                <table class="row mr-0 ml-0">
-                  <tbody class="col-sm-12 pl-0 pr-0">
-                    <tr class="row mr-0 ml-0">
-                      <td class="col-sm-6 pl-2 pr-1 pt-3 pb-2"><%= time_attack.title %></td>
-                      <td class="col-sm-4 pl-2 pr-1 pt-3 pb-2"><%= l time_attack.deadline_at, format: :short%></td>
-                      <td class="col-sm-2 pl-1 pr-1 pt-1 pb-2">
-                        <%= form_with model: time_attack, url: time_attack_path(time_attack.id), local: true do |f| %>
-                          <%= f.hidden_field :status, :value => "doing" %>
-                          <%= f.submit "Start", class: "col-sm-12 btn color-5" %>
-                        <% end %>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-              <!--実行中=>終了-->
-              <% elsif time_attack.status == "doing" %>
-                <table class="row mr-0 ml-0">
-                  <tbody class="col-sm-12 pl-0 pr-0">
-                    <tr class="row mr-0 ml-0">
-                      <td class="col-sm-6 pl-2 pr-1 pt-3 pb-2"><%= time_attack.title %></td>
-                      <td class="col-sm-4 pl-2 pr-1 pt-3 pb-2"><%= l time_attack.deadline_at, format: :short%></td>
-                      <td class="col-sm-2 pl-1 pr-1 pt-1 pb-2">
-                        <%= form_with model: time_attack, url: time_attack_path(time_attack.id), local: true do |f| %>
-                          <%= f.hidden_field :status, :value => "after" %>
-                          <%= f.submit "Finish", class: "col-sm-12 btn color-6" %>
-                        <% end %>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-              <!--終了後-->
-              <% else %>
-                <table class="row mr-0 ml-0">
-                  <tbody class="col-sm-12 pl-0 pr-0">
-                    <tr class="row mr-0 ml-0">
-                      <td class="col-sm-6 pl-2 pr-1 pt-3 pb-2 finish"><%= time_attack.title %></td>
-                      <td class="col-sm-4 pl-2 pr-1 pt-3 pb-2"></td>
-                      <td class="col-sm-2 pl-1 pr-1 pt-3 pb-2"><%= time_attack.diff %></td>
-                    </tr>
-                  </tbody>
-                </table>
-              <% end %>
-
-            <% end %>
-          <% end %>
+        <div id="list">
+          <%= render partial: "time_attacks/list", locals: { time_attack: @time_attack, time_attacks: @time_attacks } %>
         </div>
          <!--status："doing"のMissionがない時-->
       <% else %>
@@ -179,7 +117,7 @@
                       <%= hidden_field_tag "authenticity_token", form_authenticity_token %>
 
                       <% @small_goals.each do |small_goal| %>
-                        <tr class="pb-3 color-4 item" data-url="<%= sort_small_goals_path(small_goal) %>">
+                        <tr class="color-4 item" data-url="<%= sort_small_goals_path(small_goal) %>">
                           <td class="td_1 pl-1 color-4">
                             <!--スモールゴールタイトル-->
                             <%= small_goal.title %>
@@ -197,15 +135,15 @@
                             <% if small_goal.status == "before" %>
                               <%= form_with model: small_goal, local: true do |f| %>
                                 <%= f.hidden_field :status, :value => "doing" %>
-                                <%= f.submit "Start", class: "btn my_table color-5" %>
+                                <%= f.submit "Start", class: "btn my_table color-5 mb-2" %>
                               <% end %>
                             <% elsif small_goal.status == "doing" %>
                               <%= form_with model: small_goal, local: true do |f| %>
                                 <%= f.hidden_field :status, :value => "after" %>
-                                <%= f.submit "Finish", class: "btn my_table color-6" %>
+                                <%= f.submit "Finish", class: "btn my_table color-6 mb-2" %>
                               <% end %>
                             <% elsif small_goal.status == "after" %>
-                              <p class="mb-0 pt-1 color-4">Clear!</p>
+                              <p class="mb-0 pt-1 color-4 mb-2 pt-2 pb-2">Clear!</p>
                             <% end %>
                           </td>
 

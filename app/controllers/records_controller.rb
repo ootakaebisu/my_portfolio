@@ -12,7 +12,7 @@ class RecordsController < ApplicationController
       @daily_records = @mission.time_attacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count + @mission.records.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count
     end
     if @mission.present? && @mission.records.present?
-      @records = @mission.records.all
+      @records = Record.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
     end
     @record = Record.new
     @small_goal = SmallGoal.new
@@ -22,12 +22,15 @@ class RecordsController < ApplicationController
   end
 
   def create
+    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+    @record_new = Record.new
+    @record_new.mission_id = @mission.id
+    @records = Record.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
     @record = Record.new(record_params)
     if @record.save
-      redirect_back(fallback_location: root_path)
+      # logger.debug 'グーグル！！！！！！！！！！'
+      # redirect_back(fallback_location: root_path)
     else
-      @mission = Mission.find_by(user_id: current_user.id, status: "doing")
-      @records = @mission.records.all
       render 'new'
     end
   end
@@ -63,7 +66,11 @@ class RecordsController < ApplicationController
   def destroy
     @record = Record.find(params[:id])
     @record.destroy
-    redirect_back(fallback_location: root_path)
+    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+    @records = Record.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
+    # logger.debug 'グーグル！！！！！！！！！！'
+    # byebug
+    # redirect_back(fallback_location: root_path)
   end
 
   protected
