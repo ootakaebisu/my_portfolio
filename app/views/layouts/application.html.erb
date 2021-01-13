@@ -5,8 +5,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= include_gon %>
+    <%#= include_gon %>
 
+
+    <script src="https://kit.fontawesome.com/45c58c3b7f.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -15,8 +17,8 @@
     <header>
       <%= render "layouts/header" %>
     </header>
-    <!--カレンダー機能追加/body タグに data-turbolinks 属性を追加-->
-    <body data-turbolinks="false">
+
+    <body>
       <div class= "container-fluid mb-5">
         <%= yield %>
       </div>

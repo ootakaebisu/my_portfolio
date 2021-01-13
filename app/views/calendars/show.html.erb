@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user:current_user } %>
+  </div>
+
+  <div class="col-sm-9 pr-5">
+    <h2 class="left">Event</h2><br>
+    <div class="line "></div>
+
+    <div class="">
+      <table class="row mr-0 ml-0">
+        <tbody class="col-sm-12">
+          <tr class="row mr-0 ml-0">
+            <td class="col-sm-5 pt-1"><p class="ml-2">開始日時   <%= l @calendar.start_date %></p></td>
+            <td class="col-sm-5 "><%= @calendar.title %></td>
+          </tr>
+          <tr class="row mr-0 ml-0">
+            <td class="col-sm-5 pt-1"><p class="ml-2">開始日時   <%= l @calendar.end_date %></p></td>
+            <td class="col-sm-5"><%= @calendar.description %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div><br>
+
+    <h2 class="left">Event Edit</h2><br>
+    <div class="line"></div>
+
+      <%= form_with model: @calendar, local: true do |f| %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <table class="row mr-0 ml-0">
+          <tbody class="col-sm-12">
+            <tr class="row mr-0 ml-0">
+              <td class="col-sm-5 pt-1"><p>開始日時<%= f.datetime_field :start_date, class: "ml-2 btn_ou" %></p></td>
+              <td class="col-sm-5 pt-1"><%= f.text_field :title, class: "col-sm-12 btn_ou" %></td>
+              <td class="col-sm-2 pt-1">
+                <%= f.button :type => "submit", style: 'border-style: none;' do %>
+                  <div class="btn_3"><i class="fas fa-redo-alt"></i></div>
+                <% end %>
+            </tr>
+            <tr class="row mr-0 ml-0">
+              <td class="col-sm-5 pt-1"><p>開始日時<%= f.datetime_field :end_date, class: "ml-2 btn_ou"  %></p></td>
+              <td class="col-sm-5 pt-1"><%= f.text_field :description, class: "col-sm-12 btn_ou" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <div class="d-flex justify-content-center mt-3">
+      <%= link_to "Calendarへ戻る", calendars_path, class: "btn_2" %>
+    </div>
+  </div>
+</div>
+
+

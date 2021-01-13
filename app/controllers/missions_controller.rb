@@ -8,9 +8,8 @@ class MissionsController < ApplicationController
     if @mission.save
       redirect_to result_missions_path(id: @mission.id)
     else
-      render 'new'
+      render :new
     end
-
   end
 
   def result
@@ -19,10 +18,11 @@ class MissionsController < ApplicationController
 
   def show
     @time_attack = TimeAttack.new
-    @time_attacks = TimeAttack.all
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
-    if @mission.present? && @mission.time_attacks.present?
-      @time_attack_created = TimeAttack.find(params[:id])
+    if @mission.present?
+      # 降順.order(id: "DESC")
+      @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
+      @small_goals = @mission.small_goals.rank(:row_order)
     end
     @daily_clear = DailyClear.new
     if @mission.present?
@@ -36,7 +36,6 @@ class MissionsController < ApplicationController
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
     @daily_clear = DailyClear.new
     @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
-
   end
 
   def update
@@ -70,11 +69,12 @@ class MissionsController < ApplicationController
     # スモールゴール達成数
 
     # 締め切りを何日早められたか?
-    require "date"
-    d1 = @mission.updated_at
-    d2 = @mission.deadline_on
-    @diff = Date.parse(d1.to_s) - d2
-
+    if @mission.deadline_on.present?
+      require "date"
+      d1 = @mission.updated_at
+      d2 = @mission.deadline_on
+      @diff = Date.parse(d1.to_s) - d2
+    end
   end
 
   def destroy

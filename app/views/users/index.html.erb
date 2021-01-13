@@ -3,8 +3,16 @@
     <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
   </div>
 
-  <div class="col-sm-9">
-    <label>Users</label>
+  <div class="col-sm-9 pr-5">
+    <h2 class="left">Users</h2>
+    <div class="right">
+      <%= form_with url: users_path, method: :get, local: true do |f| %>
+        <%= f.text_field :name, class: "btn_ou" %>
+        <%= f.submit :search, class: "ml-2 btn" %>
+      <% end %>
+    </div>
+
+    <div class="line mt-2"></div>
 
     <% @users.each do |user| %>
       <div>

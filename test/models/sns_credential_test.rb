@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CalendarDatumTest < ActiveSupport::TestCase
+class SnsCredentialTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

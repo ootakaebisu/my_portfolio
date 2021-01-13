@@ -1,0 +1,5 @@
+$("#recor_form").html("<%= j(render 'form',{ mission: @mission, record: @record_new }) %>");
+
+$("#record_list").html("<%= j(render 'list',{ records: @records }) %>");
+
+$("#record_title").val('')

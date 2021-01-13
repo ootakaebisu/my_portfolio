@@ -3,20 +3,63 @@
     <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
   </div>
 
-  <div class="col-sm-9">
-    <label>My Page</label>
-    <%= link_to 'Edit', edit_user_path(id: @user, order_sort: "1"), class: "" %>
+  <div class="col-sm-9 pr-5">
+    <h2 class="left">My Page</h2>
+    <div class="right">
+      <%= link_to 'Edit', edit_user_path(id: @user, order_sort: "1"), class: "btn" %>
+    </div>
+    <div class="line mt-2"></div>
 
-    <%#= 画像 %>
-    <label>ユーザー名</label>
-      <%= @user.name %>
-    <label>ユーザーID</label>
-      <%= @user.my_id %>
-    <label>メールアドレス</label>
-      <%= @user.email %>
+    <div class="row ml-0 mr-0">
+      <div class="col-sm-2">
+        <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+      </div>
 
+      <div class="col-sm-10">
+        <table>
+          <tr>
+            <th>ユーザー名</th>
+            <td></td>
+            <td></td>
+            <td>
+              <!--名前表記-->
+              <% if @user.view_name.present? %>
+                <%= @user.view_name %>
+              <% else %>
+                <label><%= @user.name %>
+              <% end %>
+             </td>
+          </tr>
+          <tr>
+            <th>ユーザーID</th>
+            <td></td>
+            <td></td>
+            <td><%= @user.my_id %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td></td>
+            <td></td>
+            <td><%= @user.email %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="line"></div>
+    <div class="right">
       <%= link_to "ログアウトする", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"}, class: ""  %>
       <%= link_to "退会はこちら", unsubscribe_users_path %>
+    </div>
+
+
   </div>
 </div>
+
+
+
+
+
+
+
 

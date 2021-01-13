@@ -1,3 +1,63 @@
 // Place all the styles related to the missions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.modal{
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.modal__bg{
+    background-color: rgba( 0, 0, 0, 0.3 );
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+.modal__content{
+    background: #efefef;
+    left: 50%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+}
+
+.my_table {
+  width: 100%;
+}
+
+.my_table_2 {
+  width: 97%;
+}
+
+.td_1 {
+  width: 60%;
+}
+
+.td_2 {
+  width: 10%;
+}
+
+.td_3 {
+  width: 22%;
+}
+
+.td_4 {
+  width: 8%;
+}
+
+.td_2_3 {
+  width: 32%;
+}

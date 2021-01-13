@@ -1,35 +1,115 @@
-<h1>Missions#edit</h1>
+<div class="row">
+  <div class="col-sm-3">
+    <%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
+  </div>
 
-<%= render 'layouts/side', { daily_clear: @daily_clear, daily_clear_status: @daily_clear_status, mission: @mission, user: current_user } %>
+  <div class="col-sm-9 pr-5">
+    <h2 class="left">Mission Edit</h2>
+    <div class="right"><%= link_to "Back", new_record_path, class: "btn" %></div>
 
-<label>ミッション管理</label>
-<%= link_to "Back", new_record_path %>
+    <div class="line mb-4 mt-2"></div>
 
-<div>
-  <label>ミッションゴールの編集</label>
-  <%= form_with model: @mission, url: mission_path(id: @mission.id, order_sort: "0" ), method: :patch, local: true do |f| %>
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-    <label>タイトル</label><br>
-    <%= f.text_field :title %><br>
-    <label>記録する事柄</label><br>
-    <%= f.text_field :record_title %><br>
-    <label>期限</label><br>
-    <%= f.date_field :deadline_on %><br>
-    <%= f.submit "Save" %>
-  <% end %>
+    <div class="">
+
+      <h3 align="center">Missionのゴール設定</h3>
+
+      <%= form_with model: @mission, url: mission_path(@mission), local: true do |f| %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <table class="row mr-0 ml-0">
+          <tbody class="col-sm-12">
+            <tr class="row mr-0 ml-0 mb-2">
+              <th class="col-sm-2 pt-2">
+                タイトル
+              </th>
+              <td class="col-sm-10">
+                <%= f.text_field :title, class: "col-sm-12 btn_ou ml-2" %>
+              </td>
+            </tr>
+
+            <tr class="row mr-0 ml-0 mb-2">
+              <th class="col-sm-2 pt-2">
+                記録する事柄
+              </th>
+              <td class="col-sm-10">
+                <%= f.text_field :record_title, class: "col-sm-12 btn_ou ml-2"  %>
+              </td>
+            </tr>
+
+            <tr class="row mr-0 ml-0 mb-2">
+              <th class="col-sm-2 pt-2">
+                期限
+              </th>
+              <td class="col-sm-10">
+                <%= f.date_field :deadline_on, class: "col-sm-12 btn_ou ml-2"  %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+        <div class="row ml-0 mr-0 mb-4 mt-2">
+          <%= f.submit "Create", class: "col-sm-2 offset-sm-5 btn"  %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="row ml-0 mr-0">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4 text-center">
+        <p>ミッションの完了</p>
+        <%= form_with model: @mission, url: mission_path(id: @mission.id, order_sort: 1 ), method: :patch, data: {confirm: "ミッションを完了しますか？"}, local: true do |f| %>
+          <%= f.hidden_field :status, :value => "after" %>
+          <%= f.submit "完了する", class: "btn color-1" %>
+        <% end %>
+
+      </div>
+       <div class="col-sm-2 text-center">
+       <div class="line_vert"></div>
+       </div>
+
+      <div class="col-sm-4 text-center">
+        <p>ミッションの削除</p>
+        <%= link_to "削除する", mission_path(@mission), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn" %>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+
+    <div class="line "></div>
+    <div class="row mr-0 ml-0">
+      <div id="chart"></div>
+    </div>
+  </div>
 </div>
 
-<div>
-  <label>ミッションの完了</label>
-  <%= form_with model: @mission, url: mission_path(id: @mission.id, order_sort: 1 ), method: :patch, data: {confirm: "ミッションを完了しますか？"}, local: true do |f| %>
-    <%= f.hidden_field :status, :value => "after" %>
-    <%= f.submit "完了する" %>
-  <% end %>
-</div>
 
-<div>
-  <label>ミッションの削除</label>
-  <%= link_to "削除する", mission_path(@mission), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "" %>
-</div>
+<script src="d3.min.js"></script><!-- D3.js を読み込む -->
+<script src="c3.min.js"></script><!-- C3.js を読み込む -->
+<link href="c3.css" rel="stylesheet" type="text/css"><br>
 
+<script>
+var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+        columns: [
+            ['data1', 30, 200, 100, 400, 150, 250],
+            ['data2', 130, 100, 140, 200, 150, 50]
+        ],
+        type: 'bar'
+    }
+});
+</script>
+
+<!--var demoSource = [];-->
+<!--  values.forEach((value) => {-->
+
+<!--      var demoSoureItem = {-->
+<!--          name: value.name,-->
+<!--          desc: value.desc,-->
+<!--          values: []v -->
+<!--      };-->
+<!--      demoSource.push(demoSoureItem);-->
+<!--  });-->
 

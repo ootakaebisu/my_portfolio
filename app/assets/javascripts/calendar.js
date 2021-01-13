@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
   function eventCalendar() {
     return $('#calendar').fullCalendar({});
   }
@@ -8,7 +8,7 @@ $(function() {
   }
 
   $('#calendar').fullCalendar({
-    events: '/events.json',
+    events: '/calendars.json',
 
     titleFormat: 'YYYY年 M月',
     dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],

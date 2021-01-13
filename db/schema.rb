@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_191800) do
+ActiveRecord::Schema.define(version: 2021_01_10_182938) do
 
-  create_table "calendar_data", force: :cascade do |t|
+  create_table "calendars", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
+    t.text "description"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_calendars_on_user_id"
   end
 
   create_table "daily_clears", force: :cascade do |t|
@@ -26,6 +28,19 @@ ActiveRecord::Schema.define(version: 2020_12_30_191800) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "gantts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "desc"
+    t.datetime "from"
+    t.datetime "to"
+    t.string "label"
+    t.string "customClass"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_gantts_on_user_id"
   end
 
   create_table "missions", force: :cascade do |t|
@@ -63,8 +78,18 @@ ActiveRecord::Schema.define(version: 2020_12_30_191800) do
     t.string "title"
     t.date "deadline_on"
     t.integer "status", default: 0
+    t.integer "row_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sns_credentials", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sns_credentials_on_user_id"
   end
 
   create_table "time_attacks", force: :cascade do |t|
@@ -85,6 +110,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_191800) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
+    t.string "view_name"
     t.string "email"
     t.string "profile_image_id"
     t.text "content"

@@ -1,5 +1,7 @@
 {
   "name": "my_portfolio",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "sortablejs": "^1.13.0"
+  }
 }
