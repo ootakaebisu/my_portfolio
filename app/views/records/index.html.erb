@@ -7,7 +7,11 @@
     <div class="row ml-0 mr-0">
       <div class="col-sm-12">
         <h2 class="left">Record Index</h2>
-        <div class="right"><%= link_to "現在のTime Attack Log へ", time_attacks_path, class: "btn" %></div>
+        <div class="right">
+            <% if @mission.present? %>
+              <%= link_to "現在のTime Attack Log へ", mission_time_attacks_path(mission_id: @mission.id), class: "btn" %>
+            <% end %>
+          </div>
       </div>
     </div>
 
