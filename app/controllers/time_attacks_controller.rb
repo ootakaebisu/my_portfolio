@@ -7,7 +7,7 @@ class TimeAttacksController < ApplicationController
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
     @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
     if @time_attack.save
-      logger.debug 'グーグル！！！！！！！！！！'
+      # logger.debug 'グーグル！！！！！！！！！！'
       # redirect_back(fallback_location: root_path)
     else
       redirect_back(fallback_location: root_path)
@@ -48,7 +48,7 @@ class TimeAttacksController < ApplicationController
       end
 
       @time_attack.update(time_attack_params)
-      logger.debug 'グーグルafter！！！！！！！！！！'
+      # logger.debug 'グーグルafter！！！！！！！！！！'
       # redirect_back(fallback_location: root_path)
     end
   end
