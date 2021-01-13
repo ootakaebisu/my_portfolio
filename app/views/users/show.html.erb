@@ -21,7 +21,14 @@
             <th>ユーザー名</th>
             <td></td>
             <td></td>
-            <td><%= @user.name %></td>
+            <td>
+              <!--名前表記-->
+              <% if @user.view_name.present? %>
+                <%= @user.view_name %>
+              <% else %>
+                <label><%= @user.name %>
+              <% end %>
+             </td>
           </tr>
           <tr>
             <th>ユーザーID</th>

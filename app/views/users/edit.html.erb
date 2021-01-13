@@ -4,46 +4,85 @@
   </div>
 
   <div class="col-sm-9 pr-5">
+    <!--public_pageから飛んできた時-->
     <% if params[:order_sort] == "0" %>
-      <!--public_pageから飛んできた時-->
-      <h2 class="left">Public Page(編集)</h2><br>
-      <div class="line "></div>
+      <h2 class="left mb-3">Public Page(編集)</h2><br>
+      <div class="line"></div>
+
       <%= form_for @user do |f| %>
+        <%= f.hidden_field :name %>
+          <table class="my_table">
+            <tr class="my_table">
+              <td class="td_1" rowspan="7" ><%= f.attachment_field :profile_image %></td>
+              <th class="td_1"></th>
+              <td class="td_2"></td>
+            </tr>
 
-        <%= f.attachment_field :profile_image %>
+            <tr>
+              <th class="td_1">ユーザー名</th>
+              <td class="td_2"><%= f.text_field :view_name, class: "my_table btn_ou mb-3" %></td>
+            </tr>
 
-        <label>ユーザー名</label>
-        <%= f.text_field :name %>
-        <label>ユーザーID</label>
-        <%= f.text_field :my_id %>
-        <%= f.fields_for :missions do |mission| %>
-          <label>ミッション内容</label>
-          <%= mission.text_field :title %>
-          <label>ミッション期限</label>
-          <%= mission.date_field :deadline_on %>
-          <%= mission.hidden_field :id, value: mission.object.id %>
-        <% end %>
-        <label>ユーザープロフィール</label>
-        <%= f.text_area :content %>
-        <%= f.submit "Save" %>
+            <tr>
+              <th>ユーザーID</th>
+              <td><%= f.text_field :my_id, class: "my_table btn_ou mb-3" %></td>
+            </tr>
+
+            <%= f.fields_for :missions do |mission| %>
+              <tr>
+                <th>ミッション内容</th>
+                <td><%= mission.text_field :title, class: "my_table btn_ou mb-3" %></td>
+              </tr>
+              <tr>
+                <th>ミッション期限</th>
+                <td><%= mission.date_field :deadline_on, class: "my_table btn_ou mb-3" %></td>
+              </tr>
+              <%= mission.hidden_field :id, value: mission.object.id %>
+            <% end %>
+
+            <tr>
+              <th>ユーザープロフィール</th>
+              <td><%= f.text_area :content, class: "my_table btn_ou mb-3" %></td>
+            </tr>
+          </table>
+        <div class="d-flex justify-content-center"><%= f.submit "Save", class: "btn_2" %></div>
       <% end %>
+
+      <div class="line"></div>
+      <div class="right">
+        <%= link_to "ログアウトする", destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか？"}, class: ""  %>
+        <%= link_to "退会はこちら", unsubscribe_users_path %>
+      </div>
+
 
     <% elsif params[:order_sort] == "1" %>
       <!--showページから飛んできた時-->
       <h2 class="left">My Page(編集)</h2><br>
       <div class="line "></div>
       <%= form_for @user do |f| %>
-        <label>ユーザー名</label>
-        <%= f.text_field :name %>
-        <label>ユーザーID</label>
-        <%= f.text_field :my_id %>
-        <label>メールアドレス</label>
-        <%= f.text_field :email %>
-        <%= f.submit "Save" %>
+        <table>
+          <tr class="my_table">
+            <td class="td_1" rowspan="4" ><%= f.attachment_field :profile_image %></td>
+            <th class="td_1"></th>
+            <td class="td_2"></td>
+          </tr>
+          <tr>
+            <th class="td_1 p">ユーザー名</th>
+            <td class="td_2"><%= f.text_field :view_name, class: "my_table btn_ou mb-3" %></td>
+          </tr>
+          <tr>
+            <th class="td_1">ユーザーID</th>
+            <td class="td_2"><%= f.text_field :my_id, class: "my_table btn_ou mb-3" %></td>
+          </tr>
+          <tr>
+            <th class="td_1">メールアドレス</th>
+            <td class="td_2"><%= f.text_field :email, class: "my_table btn_ou mb-3" %></td>
+          </tr>
+        </table>
+        <div class="d-flex justify-content-center"><%= f.submit "Save", class: "btn_2" %></div>
       <% end %>
     <% end %>
   </div>
 </div>
-
 
 

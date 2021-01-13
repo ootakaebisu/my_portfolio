@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, except: [:result]
 
   def show
     # ここから/部分テンプレート呼び出し
@@ -70,6 +71,9 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+
+
+
   end
 
   def unsubscribe
@@ -90,6 +94,7 @@ class UsersController < ApplicationController
   def public_page
     # 部分テンプレuser呼び出し部分
       @user = User.find(params[:id])
+      @mission_side = Mission.find_by(user_id: current_user.id, status: "doing")
       if @user.missions.present? && @user.missions.find_by(user_id: @user.id, status: "doing").present?
         # 総記録数の計算(nilの場合の処理)
         @mission = @user.missions.where(user_id: @user.id, status: "doing").last
@@ -116,11 +121,11 @@ class UsersController < ApplicationController
 
   protected
   def user_params
-    params.require(:user).permit(:name, :password, :my_id, :content, :profile_image)
+    params.require(:user).permit(:name, :password, :my_id, :content, :email, :profile_image, :view_name)
   end
 
   def update_user_params
     #update時は[_delete]と[id]が必要
-    params.require(:user).permit(:name, :password, :my_id, :content, :profile_image, missions_attributes: [:title, :deadline_on, :_destroy, :id])
+    params.require(:user).permit(:name, :password, :my_id, :content, :email,  :profile_image, :view_name, missions_attributes: [:title, :deadline_on, :_destroy, :id])
   end
 end

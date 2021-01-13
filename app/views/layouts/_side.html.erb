@@ -1,4 +1,4 @@
-<div class="row mr-0 ml-0">
+<div class="row mr-0 ml-0 widget--sticky ">
   <div class="col-sm-11">
     <!--凸部分-->
     <div class="row mr-0 ml-0">
@@ -7,23 +7,36 @@
           <div class="row mr-0 ml-0">
             <div class="ou col-sm-12">
               <% mission = user.missions.where(status: "doing").last %>
+
+              <!--名前表記-->
+              <% if user.view_name.present? %>
+                <label><%= user.view_name %>'s Data</label><br>
+              <% else %>
+                <label><%= user.name %>'s Data</label><br>
+              <% end %>
+
               <label><%= mission.title %></label><br>
-              <label>(ランクのバロメータ)</label><br>
-              <label>RANK</label><br>
               <label>Total : <%= mission.time_attacks.count + mission.records.count %></label><br>
-              <label>Continuation</label><br>
-              <label>Recovery</label>
+              <!--本当は継続日数とリカバリー回数を表示させたい(ゲーミフィケーション/進展FB要素)-->
+              <!--SQLの知識-->
+              <!--<label>Continuation</label><br>-->
+              <!--<label>Recovery</label>-->
             </div>
           </div>
 
           <div class="row mr-0 ml-0 d-flex flex-column text-center mt-3 mb-3">
             <% if user == current_user %>
-              <div><p>Today's All Tasks</p></div>
+
               <!--当日クリア済みの時-->
               <% if daily_clear_status.present? && daily_clear_status.status == "clear" %>
+                <div><p>Today's All Tasks</p></div>
                 <div>Clear!</div>
+              <!--過去ログ参照時-->
+              <% elsif @n.present? %>
+
               <!--当日未クリアの時-->
               <% else %>
+                <div><p>Today's All Tasks</p></div>
                 <div>
                   <%= form_with model: daily_clear, url: daily_clears_path, local: true do |f| %>
                     <%= f.hidden_field :status, :value => "clear" %>
@@ -46,12 +59,15 @@
     <!--link部分-->
     <div class="row mr-0 ml-0 d-flex flex-column pt-2">
       <%= link_to "Record", new_record_path, class: "pt-2 pb-2 pl-4" %>
-      <% if current_user.missions.present? %>
+      <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
         <%= link_to "Time Attack", mission_path(current_user.missions.last.id), class: "pt-2 pb-2 pl-4" %>
       <% end %>
         <%= link_to "Calendar", calendars_path, class: "pt-2 pb-2 pl-4" %>
         <%= link_to "Log", records_path, class: "pt-2 pb-2 pl-4" %>
-        <%= link_to "Gantt", gantts_path, class: "pt-2 pb-2 pl-4" %>
+        <%#= link_to "Gantt", gantts_path, class: "pt-2 pb-2 pl-4" %>
+      <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
+        <%= link_to "Mission", edit_mission_path(mission.id), class: "pt-2 pb-2 pl-4" %>
+      <% end %>
     </div>
   </div>
 </div>

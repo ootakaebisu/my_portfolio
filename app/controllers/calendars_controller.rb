@@ -1,5 +1,8 @@
 class CalendarsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
+    @calendar = Calendar.new
     @calendars = Calendar.all
     # ここから/部分テンプレート呼び出し
     if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
@@ -11,8 +14,29 @@ class CalendarsController < ApplicationController
   end
 
   def create
+    @calendar = Calendar.new(calendar_params)
+    if @calendar.save
+      redirect_to calendars_path
+    else
+      render :index
+    end
+  end
+
+  def show
+    @calendar = Calendar.find(params[:id])
   end
 
   def update
+    @calendar = Calendar.find(params[:id])
+    if @calendar.update(calendar_params)
+      redirect_to calendar_path(@calendar)
+    else
+      render :show
+    end
+  end
+
+  protected
+  def calendar_params
+    params.require(:calendar).permit(:user_id, :title, :description, :start_date, :end_date)
   end
 end

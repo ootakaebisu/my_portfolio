@@ -1,0 +1,7 @@
+
+$("#form").html("<%= j(render 'form',{ time_attack: @time_attack_new, mission: @mission }) %>");
+
+$("#list").html("<%= j(render 'list',{ time_attack: @time_attack, time_attacks: @time_attacks }) %>");
+
+$("#time_attack_title").val('')
+$("#time_attack_deadline_at").val('')

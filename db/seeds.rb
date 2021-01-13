@@ -27,7 +27,6 @@ Mission.create!(
   user_id: 1,
   title: 'PF制作',
   record_title: '終了タスク名',
-  deadline_on: 12/31
 )
 
 Calendar.create!(
@@ -37,5 +36,20 @@ Calendar.create!(
   start_date: Time.now,
   end_date: Time.now
 )
+
+Gantt.create!(
+  user_id: 1,
+  name: 1,
+  desc: 'ガント',
+  from: Time.now,
+  to: Time.now,
+  label: 'ラベルデータ',
+  customClass: 'クラス'
+)
+
+
+
+
+
 
 

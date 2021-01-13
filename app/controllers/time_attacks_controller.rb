@@ -1,29 +1,37 @@
 class TimeAttacksController < ApplicationController
-
+  before_action :authenticate_user!
 
   def create
+    @time_attack_new = TimeAttack.new
     @time_attack = TimeAttack.new(time_attack_params)
+    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+    @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
     if @time_attack.save
-      redirect_back(fallback_location: root_path)
+      # logger.debug 'グーグル！！！！！！！！！！'
+      # redirect_back(fallback_location: root_path)
     else
-      render :new
+      redirect_back(fallback_location: root_path)
+      # render template: "missions/show"
     end
   end
 
   def update
-    @time_attack_created = TimeAttack.find(params[:id])
-    @time_attack_created.update(time_attack_params)
+    @time_attack = TimeAttack.find(params[:id])
+    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+    @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
+    @time_attack.update(time_attack_params)
     # 実行前=>実行中はstatusのvalueの変更のみで元のページに戻る
-    if  @time_attack_created.status == "doing"
-      redirect_back(fallback_location: root_path)
+    if  @time_attack.status == "doing"
+      # redirect_back(fallback_location: root_path)
+      logger.debug 'グーグルdoing！！！！！！！！！！'
 
     # 実行中=>終了はfinish_atカラムとdiff_atカラムを作ってから元のページに戻る
-    elsif @time_attack_created.status == "after"
+    elsif @time_attack.status == "after"
       require "date"
-      @time_attack_created.finish_at = DateTime.now
+      @time_attack.finish_at = DateTime.now
 
       # Finishを押した時間から自分が定めた設定時間を引いた秒数を整数で取得
-      sec = @time_attack_created.finish_at.to_i - @time_attack_created.deadline_at.to_i
+      sec = @time_attack.finish_at.to_i - @time_attack.deadline_at.to_i
       # secの絶対値を使って差分を出す
       sec_new = sec.abs
       day, sec_r = sec_new.divmod(86400)
@@ -34,13 +42,14 @@ class TimeAttacksController < ApplicationController
       end
       # secの正と負を文字列に追加
       if sec >= 0
-        @time_attack_created.diff = "＋" + diff
+        @time_attack.diff = "＋" + diff
       else
-        @time_attack_created.diff = "－" + diff
+        @time_attack.diff = "－" + diff
       end
 
-      @time_attack_created.update(time_attack_params)
-      redirect_back(fallback_location: root_path)
+      @time_attack.update(time_attack_params)
+      # logger.debug 'グーグルafter！！！！！！！！！！'
+      # redirect_back(fallback_location: root_path)
     end
   end
 
@@ -51,9 +60,10 @@ class TimeAttacksController < ApplicationController
       i = @finish_missions.count #範囲オブジェクトの上限値として使うために終了済みミッションの個数をiと定義
       @n = params[:order_sort].to_i
     end
+
     case @n
     when 1..i #order_sortが1~iの時
-      @mission = Mission.find(@n)
+      @mission = Mission.where(user_id: current_user.id, status: "after").limit(@n).last
       # @record_paginate = @record_count.page(params[:page]).per(8) #whereで取り出したデータにページネーションを適用
 
     #以下最新ミッションのレコード表示の記述箇所(order_sortがnil)
@@ -69,7 +79,7 @@ class TimeAttacksController < ApplicationController
     if @mission.present? && @mission.records.present?
       @records = @mission.records
     end
-    
+
     if @mission.present? && @mission.time_attacks.present?
       @time_attacks = @mission.time_attacks
     end
