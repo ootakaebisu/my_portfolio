@@ -1,0 +1,120 @@
+<!--JSポップアップ部分-->
+<% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
+  <div class="modal js-modal">
+    <div class="modal__bg js-modal-close"></div>
+
+    <!--表示コンテンツ-->
+    <div class="modal__content">
+        <!--header部分-->
+      <div class="d-flex flex-row align-items-end justify-content-center">
+        <h2 class="mb-0 mr-2"><%= mission.title %></h2>
+
+        <%= link_to edit_mission_path(mission.id) do %>
+          <i class="fas fa-pen"></i>
+        <% end %>
+
+        <div class="ml-2">
+          <% if mission.deadline_on.present? %>
+            期限：<%= mission.deadline_on.strftime('%Y/%m/%d') %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="line mt-2"></div>
+
+      <!--スモールゴール部分-->
+      <div class="col-sm-12">
+
+        <!--作成-->
+        <table class="my_table">
+          <tr>
+            <%= form_with model: small_goal, url:small_goals_path, local: true do |f| %>
+              <%= f.hidden_field :mission_id, :value => mission.id %>
+              <td class="td_1"><%= f.text_field :title, class: "btn_ou my_table_2" %></td>
+              <td class="td_2_3"><%= f.date_field :deadline_on, class: "btn_ou my_table" %></td>
+              <td class="td_4 text-center"><%= f.submit "+", class: "btn_mini my_table" %></td>
+            <% end %>
+          </tr>
+        </table>
+        <div class="line"></div>
+
+
+        <!--表示-->
+          <!--スモールゴールがある時-->
+          <div class="box scrolly">
+            <% if @mission.small_goals.present? %>
+
+              <table class="my_table mb-2">
+
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+                <tbody id="fix" class="sortable">
+                  <!--自分でJS送信する時は手動で追加する必要あり/悪戯防止で通常は自動で埋め込まれる-->
+                  <%= hidden_field_tag "authenticity_token", form_authenticity_token %>
+
+                  <% small_goals.each do |small_goal| %>
+                    <tr class="color-4 item" data-url="<%= sort_small_goals_path(small_goal) %>">
+                      <td class="td_1 pl-1 color-4">
+                        <!--スモールゴールタイトル-->
+                        <%= small_goal.title %>
+                      </td>
+
+                      <td class="td_2 text-center color-4">
+                        <!--スモールゴール期日(あれば)-->
+                        <% if small_goal.deadline_on.present? %>
+                          <%= small_goal.deadline_on.strftime('%m/%d')%>
+                        <% end %>
+                      </td>
+
+                      <td class="td_3 text-center color-4">
+                        <!--スモールゴールの着手状況とその変更-->
+                        <% if small_goal.status == "before" %>
+                          <%= form_with model: small_goal, local: true do |f| %>
+                            <%= f.hidden_field :status, :value => "doing" %>
+                            <%= f.submit "Start", class: "btn my_table color-5 mb-2" %>
+                          <% end %>
+                        <% elsif small_goal.status == "doing" %>
+                          <%= form_with model: small_goal, local: true do |f| %>
+                            <%= f.hidden_field :status, :value => "after" %>
+                            <%= f.submit "Finish", class: "btn my_table color-6 mb-2" %>
+                          <% end %>
+                        <% elsif small_goal.status == "after" %>
+                          <p class="mb-0 pt-1 color-4 mb-2 pt-2 pb-2">Clear!</p>
+                        <% end %>
+                      </td>
+
+                      <td class="td_4 text-center color-4">
+                        <% if small_goal.status == "before" || small_goal.status == "doing" %>
+                          <%= link_to "×", small_goal_path(small_goal.id), method: :delete, class: "btn_mini color-4" %>
+                        <% elsif small_goal.status == "after" %>
+                          <%= form_with model: small_goal, local: true do |f| %>
+                            <%= f.hidden_field :status, :value => "before" %>
+                            <%= f.submit "←", class: "btn_mini color-4" %>
+                          <% end %>
+                        <% end %>
+                      </td>
+                    </tr>
+
+                  <% end %>
+                </tbody>
+              </table>
+
+
+            <!--スモールゴールがない時-->
+            <% else %>
+              <p class="">スモールゴールが登録されていません</p>
+            <% end %>
+          </div>
+
+
+      </div>
+
+      <div class="text-center mt-3">
+        <a class="js-modal-close btn_2" href="">close</a>
+      </div>
+
+    </div><!--modal__inner-->
+  </div><!--modal-->
+ <% end %>

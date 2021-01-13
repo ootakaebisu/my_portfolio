@@ -35,13 +35,8 @@ $(document).on('turbolinks:load', function() {
         $('.js-modal').fadeOut();
         return false;
     });
-});
-
-
-
-
-// ドラッグ&ドロップ
-$(function(){
+    
+    // ドラッグ&ドロップ
 	function fixPlaceHolderWidth(event, ui){
 		// adjust placeholder td width to original td width
 		ui.children().each(function(){
@@ -81,7 +76,12 @@ $(function(){
 	$('#not-fix').sortable({
 		placeholder: 'ui-state-highlight',
 	});
+
+    
 });
+
+
+
 
 
 // $(function(){

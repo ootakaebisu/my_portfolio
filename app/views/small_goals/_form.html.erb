@@ -1,0 +1,6 @@
+<%= form_with model: small_goal, url:small_goals_path, local: true do |f| %>
+  <%= f.hidden_field :mission_id, :value => mission.id %>
+  <td class="td_1"><%= f.text_field :title, class: "btn_ou my_table_2" %></td>
+  <td class="td_2_3"><%= f.date_field :deadline_on, class: "btn_ou my_table" %></td>
+  <td class="td_4 text-center"><%= f.submit "+", class: "btn_mini my_table", remote: true %></td>
+<% end %>
