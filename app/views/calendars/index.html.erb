@@ -10,16 +10,18 @@
     <div class="">
       <%= form_with model: @calendar, local: true do |f| %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        
         <table class="row mr-0 ml-0">
           <tbody class="col-sm-12">
             <tr class="row mr-0 ml-0">
               <td class="col-sm-5 pt-1"><p>開始日<%= f.date_field :start_date, class: "ml-2 btn_ou" %></p></td>
-              <td class="col-sm-5 pt-1"><%= f.text_field :title, class: "col-sm-12 btn_ou" %></td>
+              <td class="col-sm-5 pt-1"><%= f.text_field :title, class: "col-sm-12 btn_ou", placeholder: "イベントタイトル" %></td>
               <td class="col-sm-2 pt-1"><%= f.submit "+", class: "btn" %></td>
             </tr>
             <tr class="row mr-0 ml-0">
               <td class="col-sm-5 pt-1"><p>終了日<%= f.date_field :end_date, class: "ml-2 btn_ou"  %></p></td>
-              <td class="col-sm-5 pt-1"><%= f.text_field :description, class: "col-sm-12 btn_ou" %></td>
+              <td class="col-sm-5 pt-1"><%= f.text_field :description, class: "col-sm-12 btn_ou", placeholder: "イベント詳細" %></td>
             </tr>
           </tbody>
         </table>
@@ -27,6 +29,12 @@
     </div>
 
     <div class="line"></div>
+    
+    <% if flash[:notice] %>
+      <div class="flash">
+        <b><%= flash[:notice] %></b>
+      </div>
+    <% end %>
 
     <div class="row mr-0 ml-0">
       <div class="col-sm-10 offset-sm-1">

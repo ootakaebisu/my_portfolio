@@ -2,7 +2,7 @@ class DailyClearsController < ApplicationController
   before_action :authenticate_user!
   
   def show
-     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
+    @mission = Mission.find_by(user_id: current_user.id, status: "doing")
     @daily_records = @mission.time_attacks.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count + @mission.records.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count
   end
 
@@ -16,8 +16,6 @@ class DailyClearsController < ApplicationController
     end
   end
 
-  def update
-  end
 
   protected
   def daily_clear_params

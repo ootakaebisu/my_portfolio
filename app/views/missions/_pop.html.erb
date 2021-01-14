@@ -28,11 +28,11 @@
         <!--作成-->
         <table class="my_table">
           <tr>
-            <%= form_with model: small_goal, url:small_goals_path, local: true do |f| %>
+            <%= form_with model: small_goal, local: true do |f| %>
               <%= f.hidden_field :mission_id, :value => mission.id %>
               <td class="td_1"><%= f.text_field :title, class: "btn_ou my_table_2" %></td>
               <td class="td_2_3"><%= f.date_field :deadline_on, class: "btn_ou my_table" %></td>
-              <td class="td_4 text-center"><%= f.submit "+", class: "btn_mini my_table" %></td>
+              <td class="td_4 text-center"><%= f.submit "+", class: "btn_mini my_table", local: true %></td>
             <% end %>
           </tr>
         </table>
@@ -47,9 +47,6 @@
               <table class="my_table mb-2">
 
                 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-
                 <tbody id="fix" class="sortable">
                   <!--自分でJS送信する時は手動で追加する必要あり/悪戯防止で通常は自動で埋め込まれる-->
                   <%= hidden_field_tag "authenticity_token", form_authenticity_token %>
@@ -101,13 +98,11 @@
                 </tbody>
               </table>
 
-
             <!--スモールゴールがない時-->
             <% else %>
               <p class="">スモールゴールが登録されていません</p>
             <% end %>
           </div>
-
 
       </div>
 

@@ -4,7 +4,7 @@ class SmallGoalsController < ApplicationController
     if @small_goal.save
       redirect_back(fallback_location: root_path)
     else
-      render template: "missions/show"
+      redirect_back(fallback_location: root_path)
     end
   end
 

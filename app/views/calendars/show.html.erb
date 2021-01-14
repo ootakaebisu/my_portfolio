@@ -6,7 +6,13 @@
   <div class="col-sm-9 pr-5">
     <h2 class="left">Event</h2><br>
     <div class="line "></div>
-
+    
+      <% if flash[:notice] %>
+        <div class="flash">
+          <b><%= flash[:notice] %></b>
+        </div>
+      <% end %>
+ 
     <div class="">
       <table class="row mr-0 ml-0">
         <tbody class="col-sm-12">
@@ -27,6 +33,7 @@
 
       <%= form_with model: @calendar, local: true do |f| %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= render 'layouts/error_messages', model: f.object %>
         <table class="row mr-0 ml-0">
           <tbody class="col-sm-12">
             <tr class="row mr-0 ml-0">

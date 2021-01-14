@@ -10,9 +10,9 @@
     <nav>
       <ul class="nav navbar-nav navbar-right flex-row">
         <% if user_signed_in? %>
-          <li><%= link_to 'Users', users_path, class: "pl-3 pr-3 mr-1 ml-1" %></li>
-          <li><%= link_to 'Follows', follow_users_user_path(current_user), class: "pl-3 pr-3 mr-1 ml-1" %></li>
-          <li><%= link_to 'Public Page', public_page_user_path(current_user), class: "pl-3 pr-3 mr-1 ml-1" %></li>
+          <li><%= link_to 'Users', users_path, class: "pl-3 pr-3 mr-1 ml-1" %></li>|
+          <li><%= link_to 'Follows', follow_users_user_path(current_user), class: "pl-3 pr-3 mr-1 ml-1" %></li>|
+          <li><%= link_to 'Public Page', public_page_user_path(current_user), class: "pl-3 pr-3 mr-1 ml-1" %></li>|
           <li><%= link_to 'My Page', user_path(current_user), class: "pl-3 pr-3 mr-1 ml-1" %></li>
         <% else %>
           <!--<li><%#= link_to 'Top', root_path, class: "pl-3 pr-3 mr-1 ml-1" %></li> -->

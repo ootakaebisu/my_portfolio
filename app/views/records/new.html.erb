@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-sm-3">
     <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>
@@ -9,6 +10,13 @@
 
 
   <div class="col-sm-9 pr-5">
+    
+    <% if flash[:notice] %>
+      <div class="flash">
+        <b><%= flash[:notice] %></b>
+      </div>
+    <% end %>
+    
     <!--status："doing"のMissionがある時-->
 
     <% if current_user.missions.present? && current_user.missions.find_by(status: "doing").present? %>

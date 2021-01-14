@@ -16,6 +16,7 @@ class CalendarsController < ApplicationController
   def create
     @calendar = Calendar.new(calendar_params)
     if @calendar.save
+      flash[:notice] = "イベントを追加しました！"
       redirect_to calendars_path
     else
       render :index
@@ -29,6 +30,7 @@ class CalendarsController < ApplicationController
   def update
     @calendar = Calendar.find(params[:id])
     if @calendar.update(calendar_params)
+      flash[:notice] = "イベントを更新しました！"
       redirect_to calendar_path(@calendar)
     else
       render :show
