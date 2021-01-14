@@ -7,45 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create!(
-    my_id: 'mendako',
-    password: "000000",
-    name: 'メンダコ',
-    email: "mendako@gmail.com",
-    is_deleted: false
-  )
-
-  User.create!(
-    my_id: 'mendako2',
-    password: "000000",
-    name: 'メンダコ2',
-    email: "mendako2@gmail.com",
-    is_deleted: false
-  )
-
-Mission.create!(
-  user_id: 1,
-  title: 'PF制作',
-  record_title: '終了タスク名',
-)
-
-Calendar.create!(
-  user_id: 1,
-  title: 'PF制作',
-  description: 'tesuto',
-  start_date: Date.now,
-  end_date: Date.now
-)
-
-Gantt.create!(
-  user_id: 1,
-  name: 1,
-  desc: 'ガント',
-  from: Time.now,
-  to: Time.now,
-  label: 'ラベルデータ',
-  customClass: 'クラス'
-)
 
 
 
