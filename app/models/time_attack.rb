@@ -3,4 +3,5 @@ class TimeAttack < ApplicationRecord
   enum status: { before: 0, doing: 1, after: 2 }
 
   validates :deadline_at, presence: true
+  validates :title, presence: true
 end

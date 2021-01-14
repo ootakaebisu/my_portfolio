@@ -5,6 +5,7 @@ class MissionsController < ApplicationController
 
   def create
     @mission = Mission.new(mission_params)
+    @mission.user_id = current_user.id
     if @mission.save
       redirect_to result_missions_path(id: @mission.id)
     else
@@ -22,7 +23,7 @@ class MissionsController < ApplicationController
     if @mission.present?
       # 降順.order(id: "DESC")
       @time_attacks = TimeAttack.where(mission_id: @mission.id, created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).order(id: "DESC")
-      @small_goals = @mission.small_goals.rank(:row_order)
+      @small_goals = @mission.small_goals.order(:row_order)
     end
     @daily_clear = DailyClear.new
     if @mission.present?
@@ -35,24 +36,27 @@ class MissionsController < ApplicationController
   def edit
     @mission = Mission.find_by(user_id: current_user.id, status: "doing")
     @daily_clear = DailyClear.new
-    @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    if @mission.present?
+      @daily_clear_status = @mission.daily_clears.find_by(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+    end 
   end
 
   def update
+    @mission = Mission.find(params[:id])
     n = params[:order_sort].to_i
     case n
-    when 0
-      @mission = Mission.find(params[:id])
-      @mission.update(mission_params)
-      redirect_back(fallback_location: root_path)
     when 1
-      @mission = Mission.find(params[:id])
       @mission.update(mission_params)
-      redirect_to complete_mission_path
+      redirect_to complete_mission_path(id: @mission)
     else
-      render :edit
+      if @mission.update(mission_params)
+        flash[:notice] = "ミッションの更新に成功しました！"
+        redirect_to edit_mission_path
+      else
+        render :edit
+      end
     end
-  end
+  end  
 
   def complete
     @mission = Mission.where(user_id: current_user.id, status: "after").last

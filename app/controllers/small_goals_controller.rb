@@ -4,13 +4,13 @@ class SmallGoalsController < ApplicationController
     if @small_goal.save
       redirect_back(fallback_location: root_path)
     else
-      render template: "missions/show"
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def sort
     small_goal = SmallGoal.find(params[:small_goal_id])
-    small_goal.update(small_goal_params)
+    small_goal.update(row_order: params[:small_goal][:row_order_position])
     render body: nil
   end
 
