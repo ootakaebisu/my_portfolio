@@ -1,4 +1,4 @@
-# Active!(仮)
+# Active!
 
 ## サイト概要
 
@@ -37,5 +37,4 @@ https://docs.google.com/spreadsheets/d/1viWKdB3igaXqDh1uDPBxE2Ea56nsM60W2queCUQ9
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
-## 使用素材
-- 未定(使用の可能性あり)
+
