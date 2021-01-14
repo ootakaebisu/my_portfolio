@@ -3,7 +3,7 @@ class CalendarsController < ApplicationController
 
   def index
     @calendar = Calendar.new
-    @calendars = Calendar.all
+    @calendars = Calendar.where(user_id: current_user)
     # ここから/部分テンプレート呼び出し
     if current_user.missions.present? && current_user.missions.find_by(status: "doing").present?
       @mission = Mission.find_by(user_id: current_user.id, status: "doing")

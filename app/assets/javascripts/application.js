@@ -54,6 +54,7 @@ $(document).on('turbolinks:load', function() {
       let item = ui.item;
       let item_data = item.data();
       let params = {_method: 'put'};
+      console.log(item.index())
       // データの中身
       params['small_goal'] = { row_order_position: item.index() }
       params["authenticity_token"] = $("#authenticity_token").val()

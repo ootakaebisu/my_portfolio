@@ -26,10 +26,39 @@
 //   background-image: image-url("hoge.jpg");
 // }
 
+
+// @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Libre+Barcode+39+Text&family=Montserrat:wght@300;700&display=swap');
+
 *{
   color: #424242;
   background-color: #EFEFEF;
+  font-family: 'Lato', sans-serif;
 }
+
+// フォント
+.font-hikki {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-main {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 3px;
+}
+
+.font-ac {
+  font-family: 'Libre Barcode 39 Text', cursive;
+}
+
+// フォントサイズ
+.size-main-title {
+  font-size: 70px;
+}
+
+.size-tag {
+  font-size: 30px;
+}
+
 
 .background {
   background-color: #EFEFEF;
@@ -157,7 +186,6 @@ h3 {
 }
 
 // ボタンの挙動
-
 .btn_totsu:hover, .btn:hover, .btn_mini:hover {
   opacity: 0.6 ;
   cursor : pointer;
@@ -182,6 +210,23 @@ h3 {
 .btn_3:hover .fa-redo-alt {
   background: #424242;
   color: #ffffff ;
+}
+
+.btn_4 {
+  display: inline-block;
+  padding: 8px 50px;
+  text-decoration: none;
+  color: #424242;
+  border: solid 2px #424242;
+  border-radius: 7px;
+  font-weight: bold;
+  transition: .4s;
+}
+
+.btn_4:hover {
+  background: #84cfcf;
+  color: white;
+  border: solid 2px #efefef;
 }
 
 // ニューモフィズム(全4種類/凹or凸 × 通常div or btn)

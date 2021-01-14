@@ -10,7 +10,7 @@ class SmallGoalsController < ApplicationController
 
   def sort
     small_goal = SmallGoal.find(params[:small_goal_id])
-    small_goal.update(small_goal_params)
+    small_goal.update(row_order: params[:small_goal][:row_order_position])
     render body: nil
   end
 

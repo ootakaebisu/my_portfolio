@@ -204,3 +204,22 @@ ul.bxslider {
 .bx-wrapper .bx-next {
     visibility: hidden !important;
 }
+
+// その他のCSS
+.my_margin {
+  margin-top: -10px;
+}
+
+.writing-mode {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-align: center;
+}
+
+.writing-mode-text {
+  font-weight: regular;
+  // letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  color: #c4c4c4;
+  font-size: 20px;
+}
