@@ -3,7 +3,7 @@
     <h3 align="center">Missionのゴール設定</h3>
 
     <%= form_with model: @mission, url: missions_path, local: true do |f| %>
-      <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= render 'layouts/error_messages', model: f.object %>
 
       <div class="row ml-0 mr-0 mb-3 mt-4">
         <label>タイトル</label><br>

@@ -4,8 +4,8 @@ class CreateCalendars < ActiveRecord::Migration[5.2]
       t.references :user
       t.string :title
       t.text :description
-      t.datetime :start_date
-      t.datetime :end_date
+      t.date :start_date
+      t.date :end_date
 
       t.timestamps
     end

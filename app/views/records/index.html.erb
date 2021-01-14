@@ -6,7 +6,10 @@
   <div class="col-sm-9 pr-5">
     <div class="row ml-0 mr-0">
       <div class="col-sm-12">
-        <h2 class="left">Record Index</h2>
+        <div class="left d-flex align-items-end">
+          <h2 class="mb-0">Log</h2><h3 class="pl-2 pb-1 mb-0">Records</h3>
+        </div>
+        
         <div class="right">
             <% if @mission.present? %>
               <%= link_to "現在のTime Attack Log へ", mission_time_attacks_path(mission_id: @mission.id), class: "btn" %>
