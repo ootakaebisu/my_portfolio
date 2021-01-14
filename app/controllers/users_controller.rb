@@ -69,11 +69,8 @@ class UsersController < ApplicationController
     if @user.update(update_user_params)
       redirect_to user_path(@user)
     else
-      render :edit
+      redirect_back(fallback_location: root_path)
     end
-
-
-
   end
 
   def unsubscribe

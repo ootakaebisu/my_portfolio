@@ -1,0 +1,17 @@
+
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      mission: ミッション
+      calendar: カレンダー
+    attributes:
+      user:
+        my_id: ユーザーID
+      mission:
+        title: タイトル
+        record_title: 記録する事柄
+      calendar:
+        title: タイトル
+      
+

@@ -13,7 +13,7 @@
         <%= f.hidden_field :name %>
           <table class="my_table">
             <tr class="my_table">
-              <td class="td_1" rowspan="7" ><%= f.attachment_field :profile_image %></td>
+              <td class="td_1" rowspan="8" ><%= f.attachment_field :profile_image %></td>
               <th class="td_1"></th>
               <td class="td_2"></td>
             </tr>
@@ -26,6 +26,11 @@
             <tr>
               <th>ユーザーID</th>
               <td><%= f.text_field :my_id, class: "my_table btn_ou mb-3" %></td>
+            </tr>
+            
+            <tr>
+              <th class="td_1"></th>
+              <td class="td_2"><p class="size-mini">※ユーザーIDがすでに使われている場合更新できません。</p></td>
             </tr>
 
             <%= f.fields_for :missions do |mission| %>
@@ -60,9 +65,10 @@
       <h2 class="left">My Page(編集)</h2><br>
       <div class="line "></div>
       <%= form_for @user do |f| %>
+        
         <table>
           <tr class="my_table">
-            <td class="td_1" rowspan="4" ><%= f.attachment_field :profile_image %></td>
+            <td class="td_1" rowspan="5" ><%= f.attachment_field :profile_image %></td>
             <th class="td_1"></th>
             <td class="td_2"></td>
           </tr>
@@ -73,6 +79,10 @@
           <tr>
             <th class="td_1">ユーザーID</th>
             <td class="td_2"><%= f.text_field :my_id, class: "my_table btn_ou mb-3" %></td>
+          </tr>
+          <tr>
+            <th class="td_1"></th>
+            <td class="td_2"><p class="size-mini">※ユーザーIDがすでに使われている場合更新できません。</p></td>
           </tr>
           <tr>
             <th class="td_1">メールアドレス</th>

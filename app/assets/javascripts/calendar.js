@@ -1,4 +1,13 @@
 $(document).on('turbolinks:load', function() {
+  
+  // end1日ズレる問題再調査
+  // function dateOffset(allDay, end) {
+  //   if (allDay) {
+  //   return new Date(end);
+  //   }
+  //   return end;
+  //   }
+    
   function eventCalendar() {
     return $('#calendar').fullCalendar({});
   }

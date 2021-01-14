@@ -35,13 +35,8 @@ $(document).on('turbolinks:load', function() {
         $('.js-modal').fadeOut();
         return false;
     });
-});
-
-
-
-
-// ドラッグ&ドロップ
-$(function(){
+    
+    // ドラッグ&ドロップ
 	function fixPlaceHolderWidth(event, ui){
 		// adjust placeholder td width to original td width
 		ui.children().each(function(){
@@ -59,6 +54,7 @@ $(function(){
       let item = ui.item;
       let item_data = item.data();
       let params = {_method: 'put'};
+      console.log(item.index())
       // データの中身
       params['small_goal'] = { row_order_position: item.index() }
       params["authenticity_token"] = $("#authenticity_token").val()
@@ -81,7 +77,12 @@ $(function(){
 	$('#not-fix').sortable({
 		placeholder: 'ui-state-highlight',
 	});
+
+    
 });
+
+
+
 
 
 // $(function(){

@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2021_01_10_182938) do
     t.integer "user_id"
     t.string "title"
     t.text "description"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date "start_date"
+    t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_calendars_on_user_id"

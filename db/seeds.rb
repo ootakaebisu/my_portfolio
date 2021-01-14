@@ -33,8 +33,8 @@ Calendar.create!(
   user_id: 1,
   title: 'PF制作',
   description: 'tesuto',
-  start_date: Time.now,
-  end_date: Time.now
+  start_date: Date.now,
+  end_date: Date.now
 )
 
 Gantt.create!(
